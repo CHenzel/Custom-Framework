@@ -11,14 +11,14 @@ namespace app\controller\FormValidator;
  *
  * @author charleshenzel
  */
-class AdminFormValidator extends BaseFormValidator
+class LivreFormValidator extends BaseFormValidator
 {
     public function setFormValidator()
     {
         $this->formValidator = array(
-           'email' => array('required'=>true,'type' => 'string'),
-           'nom' => array('required'=>true,'type' => 'string'), 
-           'prenom' => array('required'=>true,'type' => 'string'), 
+           'nom' => array('required'=>true,'type' => 'string'),
+           'prix' => array('required'=>true,'type' => 'number'), 
+           'type' => array('required'=>true,'type' => 'string'), 
         );
     }
 }

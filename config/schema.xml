@@ -3,13 +3,11 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd" >
 
-    <table name="user_admin" phpName="Admin" allowPkInsert="true">
+    <table name="livre" phpName="Livre" allowPkInsert="true">
         <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
-        <column name="username" type="VARCHAR" required="true" />
-        <column name="password" type="VARCHAR" required="true" />
-        <column name="salt" type="VARCHAR" required="true" />
-        <column name="nom" type="VARCHAR" required="false" />
-        <column name="prenom" type="VARCHAR" required="false" />
+        <column name="nom" type="VARCHAR" required="true" />
+        <column name="type" type="VARCHAR" required="true" />
+        <column name="prix" type="INTEGER" required="true" />
         <behavior name="timestampable">
             <parameter name="create_column" value="date_creation" />
             <parameter name="update_column" value="date_maj" />

@@ -4,6 +4,9 @@ test_home:
 test_show:
     path: /test/fiche/{id}
     defaults: { _controller: 'TestController::show' }
+test_home:
+    path: /
+    defaults: { _controller: 'TestController::index' }
 test_new:
     path: /test/nouveau
     defaults: { _controller: 'TestController::new' }
