@@ -1,0 +1,44 @@
+propel:
+  general:
+      version: 2.0.0-dev
+ 
+  paths:
+      #projectDir: nuitinfo
+ 
+      # The directory where Propel expects to find your `schema.xml` file.
+      schemaDir: config
+ 
+      # The directory where Propel should output classes, sql, config, etc.
+      # Default value is current path #
+      outputDir: config
+# 
+#      # The directory where Propel should output generated object model classes.
+      phpDir: .
+# 
+#      # The directory where Propel should output the compiled runtime configuration.
+      phpConfDir: config/generated-conf
+# 
+#      # The directory where Propel should output the generated DDL (or data insert statements, etc.)
+      sqlDir: config/generated-sql
+ 
+  database:
+      connections:
+          nuitinfo:
+              adapter: mysql
+              settings:
+                charset: utf8
+                queries:
+                    utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
+              classname: Propel\Runtime\Connection\ConnectionWrapper
+              dsn: "mysql:host=127.0.0.1;dbname=nuitinfo"
+              user: nuitinfo
+              password: 123
+              attributes:
+  runtime:
+      defaultConnection: nuitinfo
+      connections:
+          - nuitinfo
+  generator:
+      defaultConnection: nuitinfo
+      connections:
+          - nuitinfo

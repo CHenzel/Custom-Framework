@@ -1,0 +1,48 @@
+admin_home:
+    path: /admin
+    defaults: { _controller: 'AdminController::index' }
+admin_show:
+    path: /admin/show/{id}
+    defaults: { _controller: 'AdminController::show' }
+admin_new:
+    path: /admin/nouveau
+    defaults: { _controller: 'AdminController::new' }
+admin_connexion:
+    path: /admin/connexion
+    defaults: { _controller: 'AdminController::connexion' }
+admin_deconnexion:
+    path: /admin/deconnexion
+    defaults: { _controller: 'AdminController::deconnexion' }
+admin_new_camp:
+    path: /admin/camp/nouveau
+    defaults: { _controller: 'CampController::new' }
+admin_personnel_new:
+    path: /admin/personnel/nouveau
+    defaults: { _controller: 'PersonnelController::new' }
+admin_list_personnel:
+    path: /admin/personnel/list
+    defaults: { _controller: 'PersonnelController::list' }
+admin_list_camp:
+    path: /admin/camp/list
+    defaults: { _controller: 'CampController::list' }
+admin_refugie_new:
+    path: /admin/refugie/nouveau
+    defaults: { _controller: 'RefugieController::new' }
+admin_vaccin_new:
+    path: /admin/vaccin/new
+    defaults: { _controller: 'StockVaccinController::new' }
+admin_vaccin_update:
+    path: /admin/vaccin/update
+    defaults: { _controller: 'StockVaccinController::update' }
+admin_list_vaccin:
+    path: /admin/vaccin/list
+    defaults: { _controller: 'StockVaccinController::list' }
+admin_list_refugie:
+    path: /admin/refugie/list
+    defaults: { _controller: 'RefugieController::list' }
+admin_transfert_refugie:
+    path: /admin/refugie/transfert
+    defaults: { _controller: 'RefugieController::transfert' }
+admin_recherche_refugie:
+    path: /admin/refugie/recherche
+    defaults: { _controller: 'RefugieController::recherche' }

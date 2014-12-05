@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="nuitinfo" namespace="model" defaultIdMethod="native"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd" >
+
+    <table name="user_admin" phpName="Admin" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="username" type="VARCHAR" required="true" />
+        <column name="password" type="VARCHAR" required="true" />
+        <column name="salt" type="VARCHAR" required="true" />
+        <column name="nom" type="VARCHAR" required="false" />
+        <column name="prenom" type="VARCHAR" required="false" />
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>
+    </table>
+
+    <table name="user_client" phpName="Client" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="uid" phpName="Uid" type="VARCHAR" size="50" required="true"/>
+        <column name="username" type="VARCHAR" required="true" />
+        <column name="password" type="VARCHAR" required="true" />
+        <column name="salt" type="VARCHAR" required="true" />
+        <column name="nom" type="VARCHAR" required="false" />
+        <column name="prenom" type="VARCHAR" required="false" />
+        <column name="ville" type="VARCHAR" required="false" />
+        <column name="statut" type="INTEGER" />
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="pays" phpName="Pays" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="code" type="VARCHAR" required="false" />
+        <column name="nom" type="VARCHAR" required="false" />
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="refugie" phpName="Refugie" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="nom" type="VARCHAR" required="true" />
+        <column name="prenom" type="VARCHAR" required="true" />
+        <column name="sexe" type="VARCHAR" required="true" />
+        <column name="date_naissance" type="DATE" required="true" />
+        <column name="nationalite" type="VARCHAR" required="true" />
+        <column name="visible" type="BOOLEAN" required="false" />
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="camp" phpName="Camp" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="idPays" type="INTEGER" required="true" />
+        <column name="ville" type="VARCHAR" required="true" />
+        <column name="gps_lat" type="VARCHAR" required="true" />
+        <column name="gps_long" type="VARCHAR" required="true" />
+        <column name="is_refugie" type="BOOLEAN" required="true" />
+        <column name="is_vaccination" type="BOOLEAN" required="true" />
+        <column name="is_prevention" type="BOOLEAN" required="true" />
+        <foreign-key foreignTable="pays" onDelete="cascade">
+            <reference local="idPays" foreign="id" />
+        </foreign-key> 
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="historique_refugie" phpName="HistoriqueRefugie" isCrossRef="true">
+        <column name="idRefugie" type="INTEGER" primaryKey="true" required="true" />
+        <column name="idCamp" type="INTEGER" primaryKey="true" required="true" />
+        <column name="date_arrive" type="DATE" required="true" />
+        <column name="date_depart" type="DATE" required="true" />
+        <foreign-key foreignTable="camp" onDelete="cascade">
+            <reference local="idCamp" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="refugie" onDelete="cascade">
+            <reference local="idRefugie" foreign="id" />
+        </foreign-key> 
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="personnel" phpName="Personnel" allowPkInsert="true">
+        <column name="idPersonnel" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="idCamp" type="INTEGER" required="true" />
+        <column name="nom" type="VARCHAR" required="true" />
+        <column name="prenom" type="VARCHAR" required="true" />
+        <column name="sexe" type="VARCHAR" required="true" />
+        <column name="date_naissance" type="DATE" required="true" />
+        <column name="nationalite" type="VARCHAR" required="true" />
+        <column name="poste" type="VARCHAR" required="true" />
+        <foreign-key foreignTable="camp" onDelete="cascade">
+            <reference local="idCamp" foreign="id" />
+        </foreign-key>
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="stock_vaccin" phpName="StockVaccin" isCrossRef="true">
+        <column name="idMaladie" type="INTEGER" primaryKey="true" required="true" />
+        <column name="idCamp" type="INTEGER" primaryKey="true" required="true" />
+        <column name="quantiteVaccin" type="INTEGER" required="true" />
+        <foreign-key foreignTable="camp" onDelete="cascade">
+            <reference local="idCamp" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="maladie" onDelete="cascade">
+            <reference local="idMaladie" foreign="id" />
+        </foreign-key>
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="maladie" phpName="Maladie" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" />
+        <column name="nom" type="VARCHAR" required="true" />
+        <column name="dangerosite" type="VARCHAR" required="true" />
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+    
+    <table name="maladie_refugie" phpName="MaladieRefugie" isCrossRef="true">
+        <column name="idRefugie" type="INTEGER" primaryKey="true" required="true" />
+        <column name="idMaladie" type="INTEGER" primaryKey="true" required="true" />
+        <column name="diagnostique" type="VARCHAR" required="true" />
+        <column name="date_vaccination" type="DATE" required="true" />
+        <column name="is_malade" type="BOOLEAN" required="true" />
+        <foreign-key foreignTable="refugie" onDelete="cascade">
+            <reference local="idRefugie" foreign="id" />
+        </foreign-key>
+        <foreign-key foreignTable="maladie" onDelete="cascade">
+            <reference local="idMaladie" foreign="id" />
+        </foreign-key>
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>          
+    </table>
+</database>
