@@ -1,0 +1,13 @@
+{
+    "require": {
+        "propel/propel": "2.0.*@dev",
+        "symfony/routing": "3.0.*@dev",
+        "symfony/templating": "3.0.*@dev",
+        "symfony/http-foundation": "3.0.*@dev",
+        "symfony/finder": "2.7.*@dev"
+    },
+    "autoload": {
+        "classmap": ["model/"],
+        "psr-4": { "app\\": "src/" }
+    }
+}
