@@ -1,0 +1,22 @@
+test_home:
+    path: /
+    defaults: { _controller: 'TestController::index' }
+test_show:
+    path: /test/fiche/{id}
+    defaults: { _controller: 'TestController::show' }
+test_new:
+    path: /test/nouveau
+    defaults: { _controller: 'TestController::new' }
+test_list:
+    path: /test/liste
+    defaults: { _controller: 'TestController::list' }
+
+test_connexion:
+    path: /test/connexion
+    defaults: { _controller: 'TestController::connexion' }
+test_deconnexion:
+    path: /test/deconnexion
+    defaults: { _controller: 'TestController::deconnexion' }
+test_inscription:
+    path: /test/inscription
+    defaults: { _controller: 'RefugieController::inscription' }
