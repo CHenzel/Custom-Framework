@@ -1,25 +1,20 @@
-test_home:
-    path: /
-    defaults: { _controller: 'TestController::index' }
-test_show:
-    path: /test/fiche/{id}
-    defaults: { _controller: 'TestController::show' }
-test_home:
-    path: /
-    defaults: { _controller: 'TestController::index' }
-test_new:
-    path: /test/nouveau
-    defaults: { _controller: 'TestController::new' }
-test_list:
-    path: /test/liste
-    defaults: { _controller: 'TestController::list' }
+#Book route
+book_show:
+    path: /livre/fiche/{id}
+    defaults: { _controller: 'BookController::show' }
+book_new:
+    path: /livre/nouveau
+    defaults: { _controller: 'BookController::new' }
+book_list:
+    path: /livre/liste
+    defaults: { _controller: 'BookController::list' }
 
-test_connexion:
-    path: /test/connexion
-    defaults: { _controller: 'TestController::connexion' }
-test_deconnexion:
-    path: /test/deconnexion
-    defaults: { _controller: 'TestController::deconnexion' }
-test_inscription:
-    path: /test/inscription
-    defaults: { _controller: 'RefugieController::inscription' }
+#user_connexion:
+#    path: /utilisateur/connexion
+#    defaults: { _controller: 'UtilisateurController::connexion' }
+#user_deconnexion:
+#    path: /utilisateur/deconnexion
+#    defaults: { _controller: 'UtilisateurController::deconnexion' }
+#user_inscription:
+#    path: /utilisateur/inscription
+#    defaults: { _controller: 'UtilisateurController::inscription' }

@@ -8,6 +8,6 @@
     },
     "autoload": {
         "classmap": ["src/model/"],
-        "psr-4": { "app\\": "src/" }
+        "psr-4": { "app\\": "src/", "routing\\" : "routing/" }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace app\routing;
+namespace routing;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Finder\Finder;
@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 class Routing 
@@ -17,7 +16,7 @@ class Routing
     
     public function __construct()
     {
-    $this->routes = new RouteCollection();
+        $this->routes = new RouteCollection();
     }
     
     public function configure()
@@ -37,9 +36,9 @@ class Routing
     protected function parseYmlFile()
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__.'/../../config/routing');
+        $finder->files()->in(__DIR__.'/../config/routing');
 
-        $locator = new FileLocator(array(__DIR__.'/../../config/routing'));
+        $locator = new FileLocator(array(__DIR__.'/../config/routing'));
         $loader = new YamlFileLoader($locator);
         
         foreach ($finder as $file) 
