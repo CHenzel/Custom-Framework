@@ -30,7 +30,7 @@ model/Map/
 config/propel.yml
 config/generated-conf/config.php
 config/generated-sql/
-generated-migrations/
+config/generated-migrations/
 om
 map
 bin/propel-gen*
