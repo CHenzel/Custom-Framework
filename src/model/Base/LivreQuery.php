@@ -21,15 +21,17 @@ use model\Map\LivreTableMap;
  *
  * @method     ChildLivreQuery orderById($order = Criteria::ASC) Order by the id column
  * @method     ChildLivreQuery orderByNom($order = Criteria::ASC) Order by the nom column
- * @method     ChildLivreQuery orderByType($order = Criteria::ASC) Order by the type column
+ * @method     ChildLivreQuery orderByGenre($order = Criteria::ASC) Order by the genre column
  * @method     ChildLivreQuery orderByPrix($order = Criteria::ASC) Order by the prix column
+ * @method     ChildLivreQuery orderByDateParution($order = Criteria::ASC) Order by the date_parution column
  * @method     ChildLivreQuery orderByDateCreation($order = Criteria::ASC) Order by the date_creation column
  * @method     ChildLivreQuery orderByDateMaj($order = Criteria::ASC) Order by the date_maj column
  *
  * @method     ChildLivreQuery groupById() Group by the id column
  * @method     ChildLivreQuery groupByNom() Group by the nom column
- * @method     ChildLivreQuery groupByType() Group by the type column
+ * @method     ChildLivreQuery groupByGenre() Group by the genre column
  * @method     ChildLivreQuery groupByPrix() Group by the prix column
+ * @method     ChildLivreQuery groupByDateParution() Group by the date_parution column
  * @method     ChildLivreQuery groupByDateCreation() Group by the date_creation column
  * @method     ChildLivreQuery groupByDateMaj() Group by the date_maj column
  *
@@ -42,16 +44,18 @@ use model\Map\LivreTableMap;
  *
  * @method     ChildLivre findOneById(int $id) Return the first ChildLivre filtered by the id column
  * @method     ChildLivre findOneByNom(string $nom) Return the first ChildLivre filtered by the nom column
- * @method     ChildLivre findOneByType(string $type) Return the first ChildLivre filtered by the type column
+ * @method     ChildLivre findOneByGenre(string $genre) Return the first ChildLivre filtered by the genre column
  * @method     ChildLivre findOneByPrix(int $prix) Return the first ChildLivre filtered by the prix column
+ * @method     ChildLivre findOneByDateParution(string $date_parution) Return the first ChildLivre filtered by the date_parution column
  * @method     ChildLivre findOneByDateCreation(string $date_creation) Return the first ChildLivre filtered by the date_creation column
  * @method     ChildLivre findOneByDateMaj(string $date_maj) Return the first ChildLivre filtered by the date_maj column
  *
  * @method     ChildLivre[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildLivre objects based on current ModelCriteria
  * @method     ChildLivre[]|ObjectCollection findById(int $id) Return ChildLivre objects filtered by the id column
  * @method     ChildLivre[]|ObjectCollection findByNom(string $nom) Return ChildLivre objects filtered by the nom column
- * @method     ChildLivre[]|ObjectCollection findByType(string $type) Return ChildLivre objects filtered by the type column
+ * @method     ChildLivre[]|ObjectCollection findByGenre(string $genre) Return ChildLivre objects filtered by the genre column
  * @method     ChildLivre[]|ObjectCollection findByPrix(int $prix) Return ChildLivre objects filtered by the prix column
+ * @method     ChildLivre[]|ObjectCollection findByDateParution(string $date_parution) Return ChildLivre objects filtered by the date_parution column
  * @method     ChildLivre[]|ObjectCollection findByDateCreation(string $date_creation) Return ChildLivre objects filtered by the date_creation column
  * @method     ChildLivre[]|ObjectCollection findByDateMaj(string $date_maj) Return ChildLivre objects filtered by the date_maj column
  * @method     ChildLivre[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
@@ -145,7 +149,7 @@ abstract class LivreQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, nom, type, prix, date_creation, date_maj FROM livre WHERE id = :p0';
+        $sql = 'SELECT id, nom, genre, prix, date_parution, date_creation, date_maj FROM livre WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -306,32 +310,32 @@ abstract class LivreQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the type column
+     * Filter the query on the genre column
      *
      * Example usage:
      * <code>
-     * $query->filterByType('fooValue');   // WHERE type = 'fooValue'
-     * $query->filterByType('%fooValue%'); // WHERE type LIKE '%fooValue%'
+     * $query->filterByGenre('fooValue');   // WHERE genre = 'fooValue'
+     * $query->filterByGenre('%fooValue%'); // WHERE genre LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $type The value to use as filter.
+     * @param     string $genre The value to use as filter.
      *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildLivreQuery The current query, for fluid interface
      */
-    public function filterByType($type = null, $comparison = null)
+    public function filterByGenre($genre = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($type)) {
+            if (is_array($genre)) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $type)) {
-                $type = str_replace('*', '%', $type);
+            } elseif (preg_match('/[\%\*]/', $genre)) {
+                $genre = str_replace('*', '%', $genre);
                 $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(LivreTableMap::COL_TYPE, $type, $comparison);
+        return $this->addUsingAlias(LivreTableMap::COL_GENRE, $genre, $comparison);
     }
 
     /**
@@ -373,6 +377,49 @@ abstract class LivreQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(LivreTableMap::COL_PRIX, $prix, $comparison);
+    }
+
+    /**
+     * Filter the query on the date_parution column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByDateParution('2011-03-14'); // WHERE date_parution = '2011-03-14'
+     * $query->filterByDateParution('now'); // WHERE date_parution = '2011-03-14'
+     * $query->filterByDateParution(array('max' => 'yesterday')); // WHERE date_parution > '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $dateParution The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildLivreQuery The current query, for fluid interface
+     */
+    public function filterByDateParution($dateParution = null, $comparison = null)
+    {
+        if (is_array($dateParution)) {
+            $useMinMax = false;
+            if (isset($dateParution['min'])) {
+                $this->addUsingAlias(LivreTableMap::COL_DATE_PARUTION, $dateParution['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($dateParution['max'])) {
+                $this->addUsingAlias(LivreTableMap::COL_DATE_PARUTION, $dateParution['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(LivreTableMap::COL_DATE_PARUTION, $dateParution, $comparison);
     }
 
     /**

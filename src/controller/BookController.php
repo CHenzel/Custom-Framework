@@ -1,12 +1,12 @@
 <?php
 namespace app\controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use app\controller\BaseController;
 use app\controller\FormValidator\LivreFormValidator;
 use model\Livre;
-use Symfony\Component\HttpFoundation\Request;
 
-class TestController extends BaseController
+class BookController extends BaseController
 {
     public function indexAction(Request $request)
     {
@@ -29,12 +29,13 @@ class TestController extends BaseController
                 $livre = new Livre();
                 $livre->setNom($form['nom']);
                 $livre->setPrix($form['prix']);
-                $livre->setType($form['type']);
+                $livre->setGenre($form['genre']);
+                $livre->setDateParution($form['date_parution']);
                 $livre->save();
                 
                 $flashBag->add('success', 'livre crée avec succès');
                 
-                return $this->redirect($this->generateUrl('test_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
+                return $this->redirect($this->generateUrl('book_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
             }
             else
             {

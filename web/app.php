@@ -1,10 +1,9 @@
 <?php
-
 require_once '../vendor/autoload.php';
 // setup Propel
 require_once '../config/generated-conf/config.php';
 
-use app\routing\Routing;
+use routing\Routing;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 

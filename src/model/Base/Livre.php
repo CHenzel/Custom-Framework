@@ -75,16 +75,22 @@ abstract class Livre implements ActiveRecordInterface
     protected $nom;
 
     /**
-     * The value for the type field.
+     * The value for the genre field.
      * @var        string
      */
-    protected $type;
+    protected $genre;
 
     /**
      * The value for the prix field.
      * @var        int
      */
     protected $prix;
+
+    /**
+     * The value for the date_parution field.
+     * @var        \DateTime
+     */
+    protected $date_parution;
 
     /**
      * The value for the date_creation field.
@@ -344,13 +350,13 @@ abstract class Livre implements ActiveRecordInterface
     }
 
     /**
-     * Get the [type] column value.
+     * Get the [genre] column value.
      *
      * @return string
      */
-    public function getType()
+    public function getGenre()
     {
-        return $this->type;
+        return $this->genre;
     }
 
     /**
@@ -361,6 +367,26 @@ abstract class Livre implements ActiveRecordInterface
     public function getPrix()
     {
         return $this->prix;
+    }
+
+    /**
+     * Get the [optionally formatted] temporal [date_parution] column value.
+     *
+     *
+     * @param      string $format The date/time format string (either date()-style or strftime()-style).
+     *                            If format is NULL, then the raw DateTime object will be returned.
+     *
+     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
+     *
+     * @throws PropelException - if unable to parse/validate the date/time value.
+     */
+    public function getDateParution($format = NULL)
+    {
+        if ($format === null) {
+            return $this->date_parution;
+        } else {
+            return $this->date_parution instanceof \DateTime ? $this->date_parution->format($format) : null;
+        }
     }
 
     /**
@@ -444,24 +470,24 @@ abstract class Livre implements ActiveRecordInterface
     } // setNom()
 
     /**
-     * Set the value of [type] column.
+     * Set the value of [genre] column.
      *
      * @param  string $v new value
      * @return $this|\model\Livre The current object (for fluent API support)
      */
-    public function setType($v)
+    public function setGenre($v)
     {
         if ($v !== null) {
             $v = (string) $v;
         }
 
-        if ($this->type !== $v) {
-            $this->type = $v;
-            $this->modifiedColumns[LivreTableMap::COL_TYPE] = true;
+        if ($this->genre !== $v) {
+            $this->genre = $v;
+            $this->modifiedColumns[LivreTableMap::COL_GENRE] = true;
         }
 
         return $this;
-    } // setType()
+    } // setGenre()
 
     /**
      * Set the value of [prix] column.
@@ -482,6 +508,26 @@ abstract class Livre implements ActiveRecordInterface
 
         return $this;
     } // setPrix()
+
+    /**
+     * Sets the value of [date_parution] column to a normalized version of the date/time value specified.
+     *
+     * @param  mixed $v string, integer (timestamp), or \DateTime value.
+     *               Empty strings are treated as NULL.
+     * @return $this|\model\Livre The current object (for fluent API support)
+     */
+    public function setDateParution($v)
+    {
+        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
+        if ($this->date_parution !== null || $dt !== null) {
+            if ($dt !== $this->date_parution) {
+                $this->date_parution = $dt;
+                $this->modifiedColumns[LivreTableMap::COL_DATE_PARUTION] = true;
+            }
+        } // if either are not null
+
+        return $this;
+    } // setDateParution()
 
     /**
      * Sets the value of [date_creation] column to a normalized version of the date/time value specified.
@@ -565,19 +611,25 @@ abstract class Livre implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : LivreTableMap::translateFieldName('Nom', TableMap::TYPE_PHPNAME, $indexType)];
             $this->nom = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : LivreTableMap::translateFieldName('Type', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->type = (null !== $col) ? (string) $col : null;
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : LivreTableMap::translateFieldName('Genre', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->genre = (null !== $col) ? (string) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : LivreTableMap::translateFieldName('Prix', TableMap::TYPE_PHPNAME, $indexType)];
             $this->prix = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : LivreTableMap::translateFieldName('DateCreation', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : LivreTableMap::translateFieldName('DateParution', TableMap::TYPE_PHPNAME, $indexType)];
+            if ($col === '0000-00-00') {
+                $col = null;
+            }
+            $this->date_parution = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : LivreTableMap::translateFieldName('DateCreation', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
             $this->date_creation = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : LivreTableMap::translateFieldName('DateMaj', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : LivreTableMap::translateFieldName('DateMaj', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
@@ -590,7 +642,7 @@ abstract class Livre implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 6; // 6 = LivreTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = LivreTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\model\\Livre'), 0, $e);
@@ -802,11 +854,14 @@ abstract class Livre implements ActiveRecordInterface
         if ($this->isColumnModified(LivreTableMap::COL_NOM)) {
             $modifiedColumns[':p' . $index++]  = 'nom';
         }
-        if ($this->isColumnModified(LivreTableMap::COL_TYPE)) {
-            $modifiedColumns[':p' . $index++]  = 'type';
+        if ($this->isColumnModified(LivreTableMap::COL_GENRE)) {
+            $modifiedColumns[':p' . $index++]  = 'genre';
         }
         if ($this->isColumnModified(LivreTableMap::COL_PRIX)) {
             $modifiedColumns[':p' . $index++]  = 'prix';
+        }
+        if ($this->isColumnModified(LivreTableMap::COL_DATE_PARUTION)) {
+            $modifiedColumns[':p' . $index++]  = 'date_parution';
         }
         if ($this->isColumnModified(LivreTableMap::COL_DATE_CREATION)) {
             $modifiedColumns[':p' . $index++]  = 'date_creation';
@@ -831,11 +886,14 @@ abstract class Livre implements ActiveRecordInterface
                     case 'nom':
                         $stmt->bindValue($identifier, $this->nom, PDO::PARAM_STR);
                         break;
-                    case 'type':
-                        $stmt->bindValue($identifier, $this->type, PDO::PARAM_STR);
+                    case 'genre':
+                        $stmt->bindValue($identifier, $this->genre, PDO::PARAM_STR);
                         break;
                     case 'prix':
                         $stmt->bindValue($identifier, $this->prix, PDO::PARAM_INT);
+                        break;
+                    case 'date_parution':
+                        $stmt->bindValue($identifier, $this->date_parution ? $this->date_parution->format("Y-m-d H:i:s") : null, PDO::PARAM_STR);
                         break;
                     case 'date_creation':
                         $stmt->bindValue($identifier, $this->date_creation ? $this->date_creation->format("Y-m-d H:i:s") : null, PDO::PARAM_STR);
@@ -914,15 +972,18 @@ abstract class Livre implements ActiveRecordInterface
                 return $this->getNom();
                 break;
             case 2:
-                return $this->getType();
+                return $this->getGenre();
                 break;
             case 3:
                 return $this->getPrix();
                 break;
             case 4:
-                return $this->getDateCreation();
+                return $this->getDateParution();
                 break;
             case 5:
+                return $this->getDateCreation();
+                break;
+            case 6:
                 return $this->getDateMaj();
                 break;
             default:
@@ -956,10 +1017,11 @@ abstract class Livre implements ActiveRecordInterface
         $result = array(
             $keys[0] => $this->getId(),
             $keys[1] => $this->getNom(),
-            $keys[2] => $this->getType(),
+            $keys[2] => $this->getGenre(),
             $keys[3] => $this->getPrix(),
-            $keys[4] => $this->getDateCreation(),
-            $keys[5] => $this->getDateMaj(),
+            $keys[4] => $this->getDateParution(),
+            $keys[5] => $this->getDateCreation(),
+            $keys[6] => $this->getDateMaj(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1006,15 +1068,18 @@ abstract class Livre implements ActiveRecordInterface
                 $this->setNom($value);
                 break;
             case 2:
-                $this->setType($value);
+                $this->setGenre($value);
                 break;
             case 3:
                 $this->setPrix($value);
                 break;
             case 4:
-                $this->setDateCreation($value);
+                $this->setDateParution($value);
                 break;
             case 5:
+                $this->setDateCreation($value);
+                break;
+            case 6:
                 $this->setDateMaj($value);
                 break;
         } // switch()
@@ -1050,16 +1115,19 @@ abstract class Livre implements ActiveRecordInterface
             $this->setNom($arr[$keys[1]]);
         }
         if (array_key_exists($keys[2], $arr)) {
-            $this->setType($arr[$keys[2]]);
+            $this->setGenre($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
             $this->setPrix($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setDateCreation($arr[$keys[4]]);
+            $this->setDateParution($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setDateMaj($arr[$keys[5]]);
+            $this->setDateCreation($arr[$keys[5]]);
+        }
+        if (array_key_exists($keys[6], $arr)) {
+            $this->setDateMaj($arr[$keys[6]]);
         }
     }
 
@@ -1108,11 +1176,14 @@ abstract class Livre implements ActiveRecordInterface
         if ($this->isColumnModified(LivreTableMap::COL_NOM)) {
             $criteria->add(LivreTableMap::COL_NOM, $this->nom);
         }
-        if ($this->isColumnModified(LivreTableMap::COL_TYPE)) {
-            $criteria->add(LivreTableMap::COL_TYPE, $this->type);
+        if ($this->isColumnModified(LivreTableMap::COL_GENRE)) {
+            $criteria->add(LivreTableMap::COL_GENRE, $this->genre);
         }
         if ($this->isColumnModified(LivreTableMap::COL_PRIX)) {
             $criteria->add(LivreTableMap::COL_PRIX, $this->prix);
+        }
+        if ($this->isColumnModified(LivreTableMap::COL_DATE_PARUTION)) {
+            $criteria->add(LivreTableMap::COL_DATE_PARUTION, $this->date_parution);
         }
         if ($this->isColumnModified(LivreTableMap::COL_DATE_CREATION)) {
             $criteria->add(LivreTableMap::COL_DATE_CREATION, $this->date_creation);
@@ -1207,8 +1278,9 @@ abstract class Livre implements ActiveRecordInterface
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setNom($this->getNom());
-        $copyObj->setType($this->getType());
+        $copyObj->setGenre($this->getGenre());
         $copyObj->setPrix($this->getPrix());
+        $copyObj->setDateParution($this->getDateParution());
         $copyObj->setDateCreation($this->getDateCreation());
         $copyObj->setDateMaj($this->getDateMaj());
         if ($makeNew) {
@@ -1248,8 +1320,9 @@ abstract class Livre implements ActiveRecordInterface
     {
         $this->id = null;
         $this->nom = null;
-        $this->type = null;
+        $this->genre = null;
         $this->prix = null;
+        $this->date_parution = null;
         $this->date_creation = null;
         $this->date_maj = null;
         $this->alreadyInSave = false;

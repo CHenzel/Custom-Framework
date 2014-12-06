@@ -173,7 +173,7 @@
                                 <a href="#"><i class="fa fa-list"></i> Liste des livres</a>
                             </li>
                             <li>
-                                <a href="<?php echo $view['router']->generate('test_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un livre</a>
+                                <a href="<?php echo $view['router']->generate('book_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un livre</a>
                             </li>
                         </ul>
                     </li>

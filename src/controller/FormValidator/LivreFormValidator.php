@@ -18,7 +18,8 @@ class LivreFormValidator extends BaseFormValidator
         $this->formValidator = array(
            'nom' => array('required'=>true,'type' => 'string'),
            'prix' => array('required'=>true,'type' => 'number'), 
-           'type' => array('required'=>true,'type' => 'string'), 
+           'genre' => array('required'=>true,'type' => 'string'),
+           'date_parution' => array('required'=>true,'type' => 'string'),
         );
     }
 }
