@@ -10,14 +10,19 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class Routing 
 {
     protected $routes;
+    protected $mode;
     
-    public function __construct()
+    public function __construct($mode='dev')
     {
         $this->routes = new RouteCollection();
+        $this->mode = $mode;
+        if($this->mode=='dev') ini_set("display_errors", 1);
     }
     
     public function configure()
@@ -74,7 +79,7 @@ class Routing
         
         $namespace = "app\\controller\\".$controllerName;
         
-        $controller = new $namespace($requestContext, $this->routes,$request);
+        $controller = new $namespace($requestContext, $this->routes,$request,$this->mode);
         $action = $actionName.'Action';
         
         $request->attributes->add($parameters);
@@ -89,8 +94,22 @@ class Routing
         $response = $controller->$action($request);
         if(!($response instanceof Response))
         {
-            throw new \Exception('Le controller doit renvoyer une réponse (Symfony\Component\HttpFoundation\Response)', 500);
+            if($this->mode == 'dev')
+            {
+                try{
+                    throw new \Exception('Le controller doit renvoyer une réponse (Symfony\Component\HttpFoundation\Response)', 500);
+                } catch(\Exception $e){
+                    echo '<br />'.$e;
+                }
+            }
+            else {
+                return $this->render('erreur_500.php');
+            }
         }
-        return $response;
+        else
+        {
+            $response->send();
+        }
+        //return $response;
     }
 }

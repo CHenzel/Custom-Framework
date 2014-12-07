@@ -18,8 +18,8 @@ if(!$request->hasSession())
     $request->getSession()->set('mode', $mode);
 }*/
 
-$routing = new Routing();
+$routing = new Routing($mode);
 $routing->configure();
 $response = $routing->match();
-$response->send();
+//$response->send();
 

@@ -1,8 +1,8 @@
 <?php
 namespace app\controller;
 
+use app\controller\inc\RouterHelper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGenerator;
@@ -11,7 +11,6 @@ use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\TemplateNameParser;
-use app\controller\inc\RouterHelper;
 
 class BaseController 
 {
@@ -19,13 +18,15 @@ class BaseController
     protected $requestContext;
     protected $request;
     protected $session;
+    protected $mode;
     
-    public function __construct($requestContext, $routes,$request) 
+    public function __construct($requestContext, $routes,$request,$mode) 
     {
         $this->requestContext = $requestContext;
         $this->routes = $routes;
         //$this->request = Request::createFromGlobals();
         $this->request = $request;
+        $this->mode = $mode;
         $this->setSession();
     }
     
@@ -95,6 +96,22 @@ class BaseController
         }else
         {
             return null;
+        }
+    }
+    
+    protected function exceptionNotFound($message)
+    {
+        if($this->mode == 'dev')
+        {
+            try{
+                throw new \Exception($message);
+            } catch(\Exception $e){
+                echo '<br />'.$e;
+            }
+        }
+        else
+        {
+             return $this->render('erreur_500.php');
         }
     }
     

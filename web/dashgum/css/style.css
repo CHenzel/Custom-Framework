@@ -2240,4 +2240,16 @@ label {
     min-height: 900px;
 }
 
+.mr0 { margin-right: 0px; }
+.mr10 { margin-right: 10px; }
+.mr20 { margin-right: 20px; }
+.mt0 { margin-top: 0px; }
+.mt10 { margin-top: 10px; }
+.mt20 { margin-top: 20px; }
+.mb0 { margin-bottom: 0px; }
+.mb10 { margin-bottom: 10px; }
+.mb20 { margin-bottom: 20px; }
+.ml0 { margin-left: 0px; }
+.ml10 { margin-left: 10px; }
+.ml20 { margin-left: 20px; }
 
