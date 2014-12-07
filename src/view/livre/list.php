@@ -45,6 +45,7 @@
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'genre','label'=>'Genre','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'dateParution','label'=>'Date de parution','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'prix','label'=>'Prix','route'=>$route,'datagrid'=>$datagrid)); ?></th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,22 +56,25 @@
                                 <td><?php echo $book->getGenre(); ?></td>
                                 <td><?php echo $book->getDateParution() ? $book->getDateParution()->format('Y-m-d') : ''; ?></td>
                                 <td><?php echo $book->getPrix(); ?></td>
+                                <td>
+                                    <button class="btn btn-success btn-xs"><i class="fa fa-eye"></i></button>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                </td>  
                             </tr>
                             <?php } ?>
                         </tbody>
                     </table>
                 </section>
-            </div>
-            <!--<div class="panel-footer">
                 <div class="row">
-                    <div class="col-lg-8">
-                        {% include 'SpyritPropelDatagridBundle:Datagrid:pagination.html.twig' with { 'datagrid': datagrid, 'route' : route } %}
+                    <div class="col-lg-12">
+                        <?php echo $view->render('datagrid/pagination.php', array('route'=>$route,'datagrid'=>$datagrid,'extraParameters' => null)); ?>
                     </div>
-                    <div class="col-lg-4">
-                        {% include 'SpyritPropelDatagridBundle:Datagrid:pagination_info.html.twig' with { 'datagrid': datagrid } %}
+                    <div class="col-lg-6"
+                         <?php echo $view->render('datagrid/pagination_info.php', array('datagrid'=>$datagrid,'label' => 'livre(s)')); ?>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
 </div>

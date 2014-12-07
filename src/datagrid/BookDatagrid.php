@@ -30,5 +30,10 @@ class BookDatagrid extends BaseDatagrid
     {
          return 'book';
     }
-
+    
+    public function getMaxPerPage() 
+    {
+        return 5;
+    }
+    
 }

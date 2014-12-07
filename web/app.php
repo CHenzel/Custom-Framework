@@ -4,11 +4,11 @@ require_once '../vendor/autoload.php';
 require_once '../config/generated-conf/config.php';
 
 use routing\Routing;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+//use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Session\Session;
 
 $mode = 'dev';
-$request = Request::createFromGlobals();
+/*$request = Request::createFromGlobals();
 
 if(!$request->hasSession())
 {
@@ -16,7 +16,7 @@ if(!$request->hasSession())
     $request->setSession($session);
     $request->getSession()->start();
     $request->getSession()->set('mode', $mode);
-}
+}*/
 
 $routing = new Routing();
 $routing->configure();
