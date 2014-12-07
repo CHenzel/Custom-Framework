@@ -6,8 +6,8 @@ book_new:
     path: /livre/nouveau
     defaults: { _controller: 'BookController::new' }
 book_list:
-    path: /livre/liste
-    defaults: { _controller: 'BookController::list' }
+    path: /livre/liste/{action}/{datagrid}/{param1}/{param2}
+    defaults: { _controller: 'BookController::list', action: null, datagrid: null, param1: null, param2: null }
 
 #user_connexion:
 #    path: /utilisateur/connexion

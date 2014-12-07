@@ -5,6 +5,8 @@ use Symfony\Component\HttpFoundation\Request;
 use app\controller\BaseController;
 use app\controller\FormValidator\LivreFormValidator;
 use model\Livre;
+use app\datagrid\BookDatagrid;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class BookController extends BaseController
 {
@@ -49,10 +51,13 @@ class BookController extends BaseController
     
     public function listAction(Request $request)
     {
-        $livres = \model\LivreQuery::create()->find();
+        $session = $this->getSession();
+        
+        $bookDatagrid = new BookDatagrid(new UrlGenerator($this->routes, $this->requestContext),$request);
+        $bookDatagrid->execute();
         
         return $this->render('livre/list.php', 
-                array('livres' => $livres,
+                array('bookDatagrid' => $bookDatagrid,
                 ));
     }
 }

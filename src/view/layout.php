@@ -212,9 +212,7 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="#"><img src="<?php echo $view['assets']->getUrl('dashgum/img/ui-sam.jpg') ?>" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">Support <br />url:<?php echo '-'.$request->getPathInfo().'-'?>
-                      <?php echo '<br />'.strpos($request->getPathInfo(), '\/')?>
-                  </h5>
+                  <h5 class="centered">Support</h5>
               	  	
                   <li class="mt">
                       <a class="<?php if($request->getPathInfo() == $view['router']->generate('home')) { echo'active'; } else { echo '';} ?>" href="<?php echo $view['router']->generate('home') ?>">
@@ -228,8 +226,8 @@
                           <span>Livres</span>
                       </a>
                       <ul class="sub">
-                        <li>
-                            <a class="" href="#"><i class="fa fa-list"></i> Liste des livres</a>
+                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('book_list'))!== false) { echo'active'; } else { echo '';} ?>">
+                            <a href="<?php echo $view['router']->generate('book_list') ?>"><i class="fa fa-list"></i> Liste des livres</a>
                         </li>
                         <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('book_new'))!== false) { echo'active'; } else { echo '';} ?>">
                             <a href="<?php echo $view['router']->generate('book_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un livre</a>

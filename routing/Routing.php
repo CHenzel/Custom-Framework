@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Loader\YamlFileLoader;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class Routing 
 {
@@ -73,10 +74,18 @@ class Routing
         
         $namespace = "app\\controller\\".$controllerName;
         
-        $controller = new $namespace($requestContext, $this->routes);
+        $controller = new $namespace($requestContext, $this->routes,$request);
         $action = $actionName.'Action';
         
         $request->attributes->add($parameters);
+        
+        if(!$request->hasSession())
+        {
+            $session = new Session();
+            $request->setSession($session);
+            $request->getSession()->start();
+        }
+        
         $response = $controller->$action($request);
         if(!($response instanceof Response))
         {

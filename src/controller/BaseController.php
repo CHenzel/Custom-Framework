@@ -20,11 +20,12 @@ class BaseController
     protected $request;
     protected $session;
     
-    public function __construct($requestContext, $routes) 
+    public function __construct($requestContext, $routes,$request) 
     {
         $this->requestContext = $requestContext;
         $this->routes = $routes;
-        $this->request = Request::createFromGlobals();
+        //$this->request = Request::createFromGlobals();
+        $this->request = $request;
         $this->setSession();
     }
     
@@ -82,17 +83,7 @@ class BaseController
     
     protected function getSession()
     {
-        /*die('ok2');
-        if($this->request->hasSession())
-        {*/
-            return $this->session;
-        /*}else
-        {
-           $session = new Session();
-           $this->request->setSession($session);
-           $this->session = $this->request->getSession();
-           return $this->session;
-        }*/
+        return $this->session;
     }
     
     protected function getUser()

@@ -14,6 +14,11 @@
 </div>
 <div class="row">
     <div class="col-lg-8">
+        <?php echo $view->render('flagbag-message.php', array()); ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
         <?php echo $view->render('livre/form.php', array()); ?>
     </div>
 </div>
