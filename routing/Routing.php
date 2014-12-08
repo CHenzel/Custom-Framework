@@ -10,19 +10,19 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Routing 
 {
     protected $routes;
     protected $mode;
+    protected $security;
     
     public function __construct($mode='dev')
     {
         $this->routes = new RouteCollection();
         $this->mode = $mode;
-        if($this->mode=='dev') ini_set("display_errors", 1);
+        $this->security = new Security();
     }
     
     public function configure()
@@ -66,12 +66,31 @@ class Routing
     public function match()
     {
         $request = Request::createFromGlobals();
+        
+        if(!$request->hasSession())
+        {
+            $session = new Session();
+            $request->setSession($session);
+            $request->getSession()->start();
+        }
+        
         $requestContext = new RequestContext();
         $requestContext->fromRequest($request);
         
         $matcher = new UrlMatcher($this->routes, $requestContext);
         
         $parameters = $matcher->match($request->getPathInfo());
+        
+        $this->security->configure($request,$requestContext,$this->routes);
+        
+        $response = $this->security->accessCheck($request->getPathInfo());
+        
+        if($response)
+        {
+           $parameters = $matcher->match($response);
+        }
+            
+        
         //var_dump(extract($matcher->match($request->getPathInfo()), EXTR_SKIP)); die('oki');
         $parametersController = explode("::",$parameters['_controller']);
         $controllerName = $parametersController[0];
@@ -83,13 +102,6 @@ class Routing
         $action = $actionName.'Action';
         
         $request->attributes->add($parameters);
-        
-        if(!$request->hasSession())
-        {
-            $session = new Session();
-            $request->setSession($session);
-            $request->getSession()->start();
-        }
         
         $response = $controller->$action($request);
         if(!($response instanceof Response))
@@ -103,7 +115,7 @@ class Routing
                 }
             }
             else {
-                return $this->render('erreur_500.php');
+                return $controller->render('erreur_500.php');
             }
         }
         else

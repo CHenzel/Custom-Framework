@@ -2,10 +2,10 @@
 
 namespace model;
 
-use model\Base\Client as BaseClient;
+use model\Base\Admin as BaseAdmin;
 
 /**
- * Skeleton subclass for representing a row from the 'user_client' table.
+ * Skeleton subclass for representing a row from the 'user_admin' table.
  *
  *
  *
@@ -14,7 +14,7 @@ use model\Base\Client as BaseClient;
  * long as it does not already exist in the output directory.
  *
  */
-class Client extends BaseClient
+class Admin extends BaseAdmin
 {
 
 }

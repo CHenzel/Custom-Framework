@@ -4,10 +4,19 @@ require_once '../vendor/autoload.php';
 require_once '../config/generated-conf/config.php';
 
 use routing\Routing;
-//use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\HttpFoundation\Session\Session;
 
 $mode = 'dev';
+
+if($mode=='prod')
+{
+    ini_set("display_errors",0);
+    error_reporting(0);
+}
+else
+{
+    ini_set("display_errors",1);
+    error_reporting(E_ALL & ~E_NOTICE);
+}
 /*$request = Request::createFromGlobals();
 
 if(!$request->hasSession())
@@ -22,4 +31,3 @@ $routing = new Routing($mode);
 $routing->configure();
 $response = $routing->match();
 //$response->send();
-

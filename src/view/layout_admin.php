@@ -14,24 +14,25 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $view['assets']->getUrl('dashgum/css/bootstrap.css') ?>" rel="stylesheet">
     
-    <!--external css-->
-    <link href="<?php echo $view['assets']->getUrl('dashgum/font-awesome/css/font-awesome.css') ?>" rel="stylesheet" />
+    <!-- Date picker -->
+    <link href="<?php echo $view['assets']->getUrl('datepicker/css/bootstrap-datetimepicker.css') ?>" rel="stylesheet">
     
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">--> 
+    <!-- Fontawesome -->
+    <link href="<?php echo $view['assets']->getUrl('dashgum/font-awesome/css/font-awesome.css') ?>" rel="stylesheet" />
+    <link href="<?php echo $view['assets']->getUrl('css/font-awesome-animation.css') ?>" rel="stylesheet">
+    
+    <!-- Gritter notification -->
     <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl('dashgum/js/gritter/css/jquery.gritter.css') ?>" />
+    
+    <!-- LineIcons -->
     <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl('dashgum/lineicons/style.css') ?>">
     
     <!-- Selectize -->
     <link href="<?php echo $view['assets']->getUrl('selectize/css/selectize.css') ?>" rel="stylesheet">
     
-    <!-- Date picker-->
-    <link href="<?php echo $view['assets']->getUrl('datepicker/css/bootstrap-datetimepicker.css') ?>" rel="stylesheet">
-    
     <!-- Custom styles for this template -->
     <link href="<?php echo $view['assets']->getUrl('dashgum/css/style.css') ?>" rel="stylesheet">
     <link href="<?php echo $view['assets']->getUrl('dashgum/css/style-responsive.css') ?>" rel="stylesheet">
-
-    <!--<script src="assets/js/chart-master/Chart.js"></script>-->
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -52,7 +53,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="<?php echo $view['router']->generate('home') ?>" class="logo"><b>Exemple Admin Panel</b></a>
+            <a href="<?php echo $view['router']->generate('admin_home') ?>" class="logo"><b>Exemple Admin Panel</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -196,7 +197,7 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="#">Logout</a></li>
+                    <li><a class="logout" href="<?php echo $view['router']->generate('admin_logout') ?>">Logout</a></li>
             	</ul>
             </div>
         </header>
@@ -215,7 +216,7 @@
                   <h5 class="centered">Support</h5>
               	  	
                   <li class="mt">
-                      <a class="<?php if($request->getPathInfo() == $view['router']->generate('home')) { echo'active'; } else { echo '';} ?>" href="<?php echo $view['router']->generate('home') ?>">
+                      <a class="<?php if($request->getPathInfo() == $view['router']->generate('admin_home')) { echo'active'; } else { echo '';} ?>" href="<?php echo $view['router']->generate('admin_home') ?>">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
@@ -226,11 +227,11 @@
                           <span>Livres</span>
                       </a>
                       <ul class="sub">
-                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('book_list'))!== false) { echo'active'; } else { echo '';} ?>">
-                            <a href="<?php echo $view['router']->generate('book_list') ?>"><i class="fa fa-list"></i> Liste des livres</a>
+                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('admin_book_list'))!== false) { echo'active'; } else { echo '';} ?>">
+                            <a href="<?php echo $view['router']->generate('admin_book_list') ?>"><i class="fa fa-list"></i> Liste des livres</a>
                         </li>
-                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('book_new'))!== false) { echo'active'; } else { echo '';} ?>">
-                            <a href="<?php echo $view['router']->generate('book_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un livre</a>
+                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('admin_book_new'))!== false) { echo'active'; } else { echo '';} ?>">
+                            <a href="<?php echo $view['router']->generate('admin_book_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un livre</a>
                         </li>
                       </ul>
                   </li>
@@ -255,7 +256,7 @@
       <!--<footer class="site-footer">
           <div class="text-center">
               2014 - Alvarez.is
-              <a href="<?php /* echo $view['router']->generate('book_new')*/ ?>#" class="go-top">
+              <a href="<?php /* echo $view['router']->generate('admin_book_new')*/ ?>#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>

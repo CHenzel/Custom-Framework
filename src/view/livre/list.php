@@ -1,6 +1,6 @@
-<?php $view->extend('layout.php') ?>
+<?php $view->extend('layout_admin.php') ?>
 <?php 
-    $route = 'book_list';
+    $route = 'admin_book_list';
     $datagrid = $bookDatagrid;
     $books = $datagrid->getResults();
    // $form = $datagrid->getFilterFormView();
@@ -10,10 +10,10 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i> <a href="<?php echo $view['router']->generate('home') ?>">Dashboard</a>
+                <i class="fa fa-dashboard"></i> <a href="<?php echo $view['router']->generate('admin_home') ?>">Dashboard</a>
             </li>
             <li class="active">
-                <i class="fa fa-list"></i> <a title="liste" href="<?php echo $view['router']->generate('book_list') ?>">Livres</a>
+                <i class="fa fa-list"></i> <a title="liste" href="<?php echo $view['router']->generate('admin_book_list') ?>">Livres</a>
             </li>
         </ol>
     </div>
@@ -57,9 +57,9 @@
                                 <td><?php echo $book->getDateParution() ? $book->getDateParution()->format('Y-m-d') : ''; ?></td>
                                 <td><?php echo $book->getPrix(); ?></td>
                                 <td>
-                                    <a class="btn btn-success btn-xs" title="voir" href="<?php echo $view['router']->generate('book_show',array('id'=>$book->getId())) ?>"><i class="fa fa-eye"></i><a/>
-                                    <a class="btn btn-primary btn-xs" title="editer" href="<?php echo $view['router']->generate('book_edit',array('id'=>$book->getId())) ?>"><i class="fa fa-pencil"></i><a/>
-                                    <a class="btn btn-danger btn-xs" title="supprimer" href="<?php echo $view['router']->generate('book_delete',array('id'=>$book->getId())) ?>"><i class="fa fa-trash-o"></i><a/>
+                                    <a class="btn btn-success btn-xs" title="voir" href="<?php echo $view['router']->generate('admin_book_show',array('id'=>$book->getId())) ?>"><i class="fa fa-eye"></i><a/>
+                                    <a class="btn btn-primary btn-xs" title="editer" href="<?php echo $view['router']->generate('admin_book_edit',array('id'=>$book->getId())) ?>"><i class="fa fa-pencil"></i><a/>
+                                    <a class="btn btn-danger btn-xs" title="supprimer" href="<?php echo $view['router']->generate('admin_book_delete',array('id'=>$book->getId())) ?>"><i class="fa fa-trash-o"></i><a/>
                                 </td>  
                             </tr>
                             <?php } ?>

@@ -2,10 +2,10 @@
 
 namespace model;
 
-use model\Base\ClientQuery as BaseClientQuery;
+use model\Base\AdminQuery as BaseAdminQuery;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'user_client' table.
+ * Skeleton subclass for performing query and update operations on the 'user_admin' table.
  *
  *
  *
@@ -14,7 +14,7 @@ use model\Base\ClientQuery as BaseClientQuery;
  * long as it does not already exist in the output directory.
  *
  */
-class ClientQuery extends BaseClientQuery
+class AdminQuery extends BaseAdminQuery
 {
 
 }

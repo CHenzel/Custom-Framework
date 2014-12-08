@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5be6dc6039feaffab115d17cd6bc1ee5",
+    "hash": "c771091afe7517959f65eb8bc8064521",
     "packages": [
         {
             "name": "csanquer/colibri-csv",
@@ -829,6 +829,53 @@
             "time": "2014-10-15 08:07:45"
         },
         {
+            "name": "symfony/filesystem",
+            "version": "2.7.x-dev",
+            "target-dir": "Symfony/Component/Filesystem",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem.git",
+                "reference": "c515060ae3829eee36cc22bc416fa60cc5656d8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c515060ae3829eee36cc22bc416fa60cc5656d8a",
+                "reference": "c515060ae3829eee36cc22bc416fa60cc5656d8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-12-08 08:43:57"
+        },
+        {
             "name": "symfony/finder",
             "version": "2.7.x-dev",
             "target-dir": "Symfony/Component/Finder",
@@ -882,12 +929,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "8c1bf447fa8bd0dcffab4282d25b33bed1be7501"
+                "reference": "f7153d9322eb5f0aeea7e3b2a38fc74d4ef42f95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/8c1bf447fa8bd0dcffab4282d25b33bed1be7501",
-                "reference": "8c1bf447fa8bd0dcffab4282d25b33bed1be7501",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/f7153d9322eb5f0aeea7e3b2a38fc74d4ef42f95",
+                "reference": "f7153d9322eb5f0aeea7e3b2a38fc74d4ef42f95",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +973,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-02 20:20:06"
+            "time": "2014-12-08 08:44:04"
         },
         {
             "name": "symfony/routing",
@@ -935,12 +982,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "50e17cc595419331211e92a55130b5f78880b571"
+                "reference": "36bc15e02d9f50b22a06de130f3589976b3c5f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/50e17cc595419331211e92a55130b5f78880b571",
-                "reference": "50e17cc595419331211e92a55130b5f78880b571",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/36bc15e02d9f50b22a06de130f3589976b3c5f1b",
+                "reference": "36bc15e02d9f50b22a06de130f3589976b3c5f1b",
                 "shasum": ""
             },
             "require": {
@@ -993,7 +1040,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-12-02 20:20:06"
+            "time": "2014-12-08 08:44:04"
         },
         {
             "name": "symfony/symfony",
@@ -1118,12 +1165,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Templating.git",
-                "reference": "059edc7295206966e2e2751de3bdddf0acd89388"
+                "reference": "25683bdbfbad3393334985deacd1f6d53f261faa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Templating/zipball/059edc7295206966e2e2751de3bdddf0acd89388",
-                "reference": "059edc7295206966e2e2751de3bdddf0acd89388",
+                "url": "https://api.github.com/repos/symfony/Templating/zipball/25683bdbfbad3393334985deacd1f6d53f261faa",
+                "reference": "25683bdbfbad3393334985deacd1f6d53f261faa",
                 "shasum": ""
             },
             "require": {
@@ -1162,7 +1209,7 @@
             ],
             "description": "Symfony Templating Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-02 20:20:06"
+            "time": "2014-12-08 08:44:04"
         },
         {
             "name": "twig/twig",
@@ -1231,6 +1278,7 @@
         "symfony/templating": 20,
         "symfony/http-foundation": 20,
         "symfony/finder": 20,
+        "symfony/filesystem": 20,
         "spyrit/propel-datagrid-bundle": 20
     },
     "prefer-stable": false,

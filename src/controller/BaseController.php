@@ -103,11 +103,7 @@ class BaseController
     {
         if($this->mode == 'dev')
         {
-            try{
-                throw new \Exception($message);
-            } catch(\Exception $e){
-                echo '<br />'.$e;
-            }
+            throw new \Exception($message);
         }
         else
         {

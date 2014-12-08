@@ -44,7 +44,7 @@ class BookController extends BaseController
                 
                 $flashBag->add('success', 'livre '.$book->getNom().' crée avec succès');
                 
-                return $this->redirect($this->generateUrl('book_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
+                return $this->redirect($this->generateUrl('admin_book_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
             }
             else
             {
@@ -82,7 +82,7 @@ class BookController extends BaseController
                 
                 $flashBag->add('success', 'Les livre '.$book->getNom().' a été mise à jour avec succès');
                 
-                return $this->redirect($this->generateUrl('book_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
+                return $this->redirect($this->generateUrl('admin_book_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
             }
             else
             {
@@ -126,7 +126,7 @@ class BookController extends BaseController
         
         $flashBag->add('success', 'Le livre '.$bookNom.' a été supprimé avec succès');
         
-        return $this->redirect($this->generateUrl('book_list',array()));
+        return $this->redirect($this->generateUrl('admin_book_list',array()));
          
     }
 }

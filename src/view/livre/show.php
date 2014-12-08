@@ -1,10 +1,10 @@
-<?php $view->extend('layout.php') ?>
+<?php $view->extend('layout_admin.php') ?>
 <h3><i class="fa fa-angle-right"></i> Livre - Ficher</h3>
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="<?php echo $view['router']->generate('home') ?>">Dashboard</a>
+                <i class="fa fa-dashboard"></i>  <a href="<?php echo $view['router']->generate('admin_home') ?>">Dashboard</a>
             </li>
             <li class="active">
                 <i class="fa fa-book"></i> Livre
@@ -29,12 +29,12 @@
                     <h4 class="mb"><i class="fa fa-angle-right"></i> Livre <?php echo $book->getNom(); ?>
                     <a class="btn btn-primary btn-xs pull-right"
                        title="editer" 
-                       href="<?php echo $view['router']->generate('book_edit',array('id'=>$book->getId())) ?>">
+                       href="<?php echo $view['router']->generate('admin_book_edit',array('id'=>$book->getId())) ?>">
                        <i class="fa fa-pencil"></i>&nbsp;Modifier
                     </a>
                     <a class="btn btn-success btn-xs pull-right mr10"
                        title="liste" 
-                       href="<?php echo $view['router']->generate('book_list') ?>">
+                       href="<?php echo $view['router']->generate('admin_book_list') ?>">
                        <i class="fa fa-list"></i>&nbsp;Liste des livres
                     </a>
                     </h4>

@@ -15,7 +15,7 @@
         </behavior>
     </table>
 
-    <table name="user_client" phpName="Client" allowPkInsert="true">
+    <table name="user_admin" phpName="Admin" allowPkInsert="true">
         <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
         <column name="uid" phpName="Uid" type="VARCHAR" size="50" required="true"/>
         <column name="username" type="VARCHAR" required="true" />

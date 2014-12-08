@@ -1,0 +1,14 @@
+firewalls:
+    admin:
+        pattern: /^\/admin.*/
+        provider: model\Admin
+        login_path: /login/admin
+#        form_login:
+#            check_path: /authentification/admin/verification
+#            login_path: /authentification/admin/connexion
+#            always_use_default_target_path: true
+#                            
+#access_control:
+#    - { path: ^/admin.*, roles: ROLE_ADMIN }      
+#    - { path: ^/client.*, roles: ROLE_CLIENT }
+#    - { path: ^/.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

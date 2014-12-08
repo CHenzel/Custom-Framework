@@ -20,20 +20,26 @@ use model\Map\AdminTableMap;
  *
  *
  * @method     ChildAdminQuery orderById($order = Criteria::ASC) Order by the id column
+ * @method     ChildAdminQuery orderByUid($order = Criteria::ASC) Order by the uid column
  * @method     ChildAdminQuery orderByUsername($order = Criteria::ASC) Order by the username column
  * @method     ChildAdminQuery orderByPassword($order = Criteria::ASC) Order by the password column
  * @method     ChildAdminQuery orderBySalt($order = Criteria::ASC) Order by the salt column
  * @method     ChildAdminQuery orderByNom($order = Criteria::ASC) Order by the nom column
  * @method     ChildAdminQuery orderByPrenom($order = Criteria::ASC) Order by the prenom column
+ * @method     ChildAdminQuery orderByVille($order = Criteria::ASC) Order by the ville column
+ * @method     ChildAdminQuery orderByStatut($order = Criteria::ASC) Order by the statut column
  * @method     ChildAdminQuery orderByDateCreation($order = Criteria::ASC) Order by the date_creation column
  * @method     ChildAdminQuery orderByDateMaj($order = Criteria::ASC) Order by the date_maj column
  *
  * @method     ChildAdminQuery groupById() Group by the id column
+ * @method     ChildAdminQuery groupByUid() Group by the uid column
  * @method     ChildAdminQuery groupByUsername() Group by the username column
  * @method     ChildAdminQuery groupByPassword() Group by the password column
  * @method     ChildAdminQuery groupBySalt() Group by the salt column
  * @method     ChildAdminQuery groupByNom() Group by the nom column
  * @method     ChildAdminQuery groupByPrenom() Group by the prenom column
+ * @method     ChildAdminQuery groupByVille() Group by the ville column
+ * @method     ChildAdminQuery groupByStatut() Group by the statut column
  * @method     ChildAdminQuery groupByDateCreation() Group by the date_creation column
  * @method     ChildAdminQuery groupByDateMaj() Group by the date_maj column
  *
@@ -45,21 +51,27 @@ use model\Map\AdminTableMap;
  * @method     ChildAdmin findOneOrCreate(ConnectionInterface $con = null) Return the first ChildAdmin matching the query, or a new ChildAdmin object populated from the query conditions when no match is found
  *
  * @method     ChildAdmin findOneById(int $id) Return the first ChildAdmin filtered by the id column
+ * @method     ChildAdmin findOneByUid(string $uid) Return the first ChildAdmin filtered by the uid column
  * @method     ChildAdmin findOneByUsername(string $username) Return the first ChildAdmin filtered by the username column
  * @method     ChildAdmin findOneByPassword(string $password) Return the first ChildAdmin filtered by the password column
  * @method     ChildAdmin findOneBySalt(string $salt) Return the first ChildAdmin filtered by the salt column
  * @method     ChildAdmin findOneByNom(string $nom) Return the first ChildAdmin filtered by the nom column
  * @method     ChildAdmin findOneByPrenom(string $prenom) Return the first ChildAdmin filtered by the prenom column
+ * @method     ChildAdmin findOneByVille(string $ville) Return the first ChildAdmin filtered by the ville column
+ * @method     ChildAdmin findOneByStatut(int $statut) Return the first ChildAdmin filtered by the statut column
  * @method     ChildAdmin findOneByDateCreation(string $date_creation) Return the first ChildAdmin filtered by the date_creation column
  * @method     ChildAdmin findOneByDateMaj(string $date_maj) Return the first ChildAdmin filtered by the date_maj column
  *
  * @method     ChildAdmin[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildAdmin objects based on current ModelCriteria
  * @method     ChildAdmin[]|ObjectCollection findById(int $id) Return ChildAdmin objects filtered by the id column
+ * @method     ChildAdmin[]|ObjectCollection findByUid(string $uid) Return ChildAdmin objects filtered by the uid column
  * @method     ChildAdmin[]|ObjectCollection findByUsername(string $username) Return ChildAdmin objects filtered by the username column
  * @method     ChildAdmin[]|ObjectCollection findByPassword(string $password) Return ChildAdmin objects filtered by the password column
  * @method     ChildAdmin[]|ObjectCollection findBySalt(string $salt) Return ChildAdmin objects filtered by the salt column
  * @method     ChildAdmin[]|ObjectCollection findByNom(string $nom) Return ChildAdmin objects filtered by the nom column
  * @method     ChildAdmin[]|ObjectCollection findByPrenom(string $prenom) Return ChildAdmin objects filtered by the prenom column
+ * @method     ChildAdmin[]|ObjectCollection findByVille(string $ville) Return ChildAdmin objects filtered by the ville column
+ * @method     ChildAdmin[]|ObjectCollection findByStatut(int $statut) Return ChildAdmin objects filtered by the statut column
  * @method     ChildAdmin[]|ObjectCollection findByDateCreation(string $date_creation) Return ChildAdmin objects filtered by the date_creation column
  * @method     ChildAdmin[]|ObjectCollection findByDateMaj(string $date_maj) Return ChildAdmin objects filtered by the date_maj column
  * @method     ChildAdmin[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
@@ -153,7 +165,7 @@ abstract class AdminQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, username, password, salt, nom, prenom, date_creation, date_maj FROM user_admin WHERE id = :p0';
+        $sql = 'SELECT id, uid, username, password, salt, nom, prenom, ville, statut, date_creation, date_maj FROM user_admin WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -282,6 +294,35 @@ abstract class AdminQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(AdminTableMap::COL_ID, $id, $comparison);
+    }
+
+    /**
+     * Filter the query on the uid column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByUid('fooValue');   // WHERE uid = 'fooValue'
+     * $query->filterByUid('%fooValue%'); // WHERE uid LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $uid The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildAdminQuery The current query, for fluid interface
+     */
+    public function filterByUid($uid = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($uid)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $uid)) {
+                $uid = str_replace('*', '%', $uid);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(AdminTableMap::COL_UID, $uid, $comparison);
     }
 
     /**
@@ -427,6 +468,76 @@ abstract class AdminQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(AdminTableMap::COL_PRENOM, $prenom, $comparison);
+    }
+
+    /**
+     * Filter the query on the ville column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByVille('fooValue');   // WHERE ville = 'fooValue'
+     * $query->filterByVille('%fooValue%'); // WHERE ville LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $ville The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildAdminQuery The current query, for fluid interface
+     */
+    public function filterByVille($ville = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($ville)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $ville)) {
+                $ville = str_replace('*', '%', $ville);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(AdminTableMap::COL_VILLE, $ville, $comparison);
+    }
+
+    /**
+     * Filter the query on the statut column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByStatut(1234); // WHERE statut = 1234
+     * $query->filterByStatut(array(12, 34)); // WHERE statut IN (12, 34)
+     * $query->filterByStatut(array('min' => 12)); // WHERE statut > 12
+     * </code>
+     *
+     * @param     mixed $statut The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildAdminQuery The current query, for fluid interface
+     */
+    public function filterByStatut($statut = null, $comparison = null)
+    {
+        if (is_array($statut)) {
+            $useMinMax = false;
+            if (isset($statut['min'])) {
+                $this->addUsingAlias(AdminTableMap::COL_STATUT, $statut['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($statut['max'])) {
+                $this->addUsingAlias(AdminTableMap::COL_STATUT, $statut['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(AdminTableMap::COL_STATUT, $statut, $comparison);
     }
 
     /**

@@ -5,6 +5,7 @@
         "symfony/templating": "3.0.*@dev",
         "symfony/http-foundation": "3.0.*@dev",
         "symfony/finder": "2.7.*@dev",
+        "symfony/filesystem": "2.7.*@dev",
         "spyrit/propel-datagrid-bundle": "dev-master"
     },
     "autoload": {
