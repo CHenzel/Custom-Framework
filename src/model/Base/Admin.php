@@ -117,6 +117,12 @@ abstract class Admin implements ActiveRecordInterface
     protected $statut;
 
     /**
+     * The value for the role field.
+     * @var        string
+     */
+    protected $role;
+
+    /**
      * The value for the date_creation field.
      * @var        \DateTime
      */
@@ -444,6 +450,16 @@ abstract class Admin implements ActiveRecordInterface
     }
 
     /**
+     * Get the [role] column value.
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
      * Get the [optionally formatted] temporal [date_creation] column value.
      *
      *
@@ -664,6 +680,26 @@ abstract class Admin implements ActiveRecordInterface
     } // setStatut()
 
     /**
+     * Set the value of [role] column.
+     *
+     * @param  string $v new value
+     * @return $this|\model\Admin The current object (for fluent API support)
+     */
+    public function setRole($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->role !== $v) {
+            $this->role = $v;
+            $this->modifiedColumns[AdminTableMap::COL_ROLE] = true;
+        }
+
+        return $this;
+    } // setRole()
+
+    /**
      * Sets the value of [date_creation] column to a normalized version of the date/time value specified.
      *
      * @param  mixed $v string, integer (timestamp), or \DateTime value.
@@ -766,13 +802,16 @@ abstract class Admin implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : AdminTableMap::translateFieldName('Statut', TableMap::TYPE_PHPNAME, $indexType)];
             $this->statut = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : AdminTableMap::translateFieldName('DateCreation', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : AdminTableMap::translateFieldName('Role', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->role = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : AdminTableMap::translateFieldName('DateCreation', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
             $this->date_creation = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : AdminTableMap::translateFieldName('DateMaj', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 11 + $startcol : AdminTableMap::translateFieldName('DateMaj', TableMap::TYPE_PHPNAME, $indexType)];
             if ($col === '0000-00-00 00:00:00') {
                 $col = null;
             }
@@ -785,7 +824,7 @@ abstract class Admin implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 11; // 11 = AdminTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 12; // 12 = AdminTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\model\\Admin'), 0, $e);
@@ -1018,6 +1057,9 @@ abstract class Admin implements ActiveRecordInterface
         if ($this->isColumnModified(AdminTableMap::COL_STATUT)) {
             $modifiedColumns[':p' . $index++]  = 'statut';
         }
+        if ($this->isColumnModified(AdminTableMap::COL_ROLE)) {
+            $modifiedColumns[':p' . $index++]  = 'role';
+        }
         if ($this->isColumnModified(AdminTableMap::COL_DATE_CREATION)) {
             $modifiedColumns[':p' . $index++]  = 'date_creation';
         }
@@ -1061,6 +1103,9 @@ abstract class Admin implements ActiveRecordInterface
                         break;
                     case 'statut':
                         $stmt->bindValue($identifier, $this->statut, PDO::PARAM_INT);
+                        break;
+                    case 'role':
+                        $stmt->bindValue($identifier, $this->role, PDO::PARAM_STR);
                         break;
                     case 'date_creation':
                         $stmt->bindValue($identifier, $this->date_creation ? $this->date_creation->format("Y-m-d H:i:s") : null, PDO::PARAM_STR);
@@ -1160,9 +1205,12 @@ abstract class Admin implements ActiveRecordInterface
                 return $this->getStatut();
                 break;
             case 9:
-                return $this->getDateCreation();
+                return $this->getRole();
                 break;
             case 10:
+                return $this->getDateCreation();
+                break;
+            case 11:
                 return $this->getDateMaj();
                 break;
             default:
@@ -1203,8 +1251,9 @@ abstract class Admin implements ActiveRecordInterface
             $keys[6] => $this->getPrenom(),
             $keys[7] => $this->getVille(),
             $keys[8] => $this->getStatut(),
-            $keys[9] => $this->getDateCreation(),
-            $keys[10] => $this->getDateMaj(),
+            $keys[9] => $this->getRole(),
+            $keys[10] => $this->getDateCreation(),
+            $keys[11] => $this->getDateMaj(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1272,9 +1321,12 @@ abstract class Admin implements ActiveRecordInterface
                 $this->setStatut($value);
                 break;
             case 9:
-                $this->setDateCreation($value);
+                $this->setRole($value);
                 break;
             case 10:
+                $this->setDateCreation($value);
+                break;
+            case 11:
                 $this->setDateMaj($value);
                 break;
         } // switch()
@@ -1331,10 +1383,13 @@ abstract class Admin implements ActiveRecordInterface
             $this->setStatut($arr[$keys[8]]);
         }
         if (array_key_exists($keys[9], $arr)) {
-            $this->setDateCreation($arr[$keys[9]]);
+            $this->setRole($arr[$keys[9]]);
         }
         if (array_key_exists($keys[10], $arr)) {
-            $this->setDateMaj($arr[$keys[10]]);
+            $this->setDateCreation($arr[$keys[10]]);
+        }
+        if (array_key_exists($keys[11], $arr)) {
+            $this->setDateMaj($arr[$keys[11]]);
         }
     }
 
@@ -1403,6 +1458,9 @@ abstract class Admin implements ActiveRecordInterface
         }
         if ($this->isColumnModified(AdminTableMap::COL_STATUT)) {
             $criteria->add(AdminTableMap::COL_STATUT, $this->statut);
+        }
+        if ($this->isColumnModified(AdminTableMap::COL_ROLE)) {
+            $criteria->add(AdminTableMap::COL_ROLE, $this->role);
         }
         if ($this->isColumnModified(AdminTableMap::COL_DATE_CREATION)) {
             $criteria->add(AdminTableMap::COL_DATE_CREATION, $this->date_creation);
@@ -1504,6 +1562,7 @@ abstract class Admin implements ActiveRecordInterface
         $copyObj->setPrenom($this->getPrenom());
         $copyObj->setVille($this->getVille());
         $copyObj->setStatut($this->getStatut());
+        $copyObj->setRole($this->getRole());
         $copyObj->setDateCreation($this->getDateCreation());
         $copyObj->setDateMaj($this->getDateMaj());
         if ($makeNew) {
@@ -1550,6 +1609,7 @@ abstract class Admin implements ActiveRecordInterface
         $this->prenom = null;
         $this->ville = null;
         $this->statut = null;
+        $this->role = null;
         $this->date_creation = null;
         $this->date_maj = null;
         $this->alreadyInSave = false;

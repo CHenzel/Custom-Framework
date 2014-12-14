@@ -28,6 +28,7 @@ use model\Map\AdminTableMap;
  * @method     ChildAdminQuery orderByPrenom($order = Criteria::ASC) Order by the prenom column
  * @method     ChildAdminQuery orderByVille($order = Criteria::ASC) Order by the ville column
  * @method     ChildAdminQuery orderByStatut($order = Criteria::ASC) Order by the statut column
+ * @method     ChildAdminQuery orderByRole($order = Criteria::ASC) Order by the role column
  * @method     ChildAdminQuery orderByDateCreation($order = Criteria::ASC) Order by the date_creation column
  * @method     ChildAdminQuery orderByDateMaj($order = Criteria::ASC) Order by the date_maj column
  *
@@ -40,6 +41,7 @@ use model\Map\AdminTableMap;
  * @method     ChildAdminQuery groupByPrenom() Group by the prenom column
  * @method     ChildAdminQuery groupByVille() Group by the ville column
  * @method     ChildAdminQuery groupByStatut() Group by the statut column
+ * @method     ChildAdminQuery groupByRole() Group by the role column
  * @method     ChildAdminQuery groupByDateCreation() Group by the date_creation column
  * @method     ChildAdminQuery groupByDateMaj() Group by the date_maj column
  *
@@ -59,6 +61,7 @@ use model\Map\AdminTableMap;
  * @method     ChildAdmin findOneByPrenom(string $prenom) Return the first ChildAdmin filtered by the prenom column
  * @method     ChildAdmin findOneByVille(string $ville) Return the first ChildAdmin filtered by the ville column
  * @method     ChildAdmin findOneByStatut(int $statut) Return the first ChildAdmin filtered by the statut column
+ * @method     ChildAdmin findOneByRole(string $role) Return the first ChildAdmin filtered by the role column
  * @method     ChildAdmin findOneByDateCreation(string $date_creation) Return the first ChildAdmin filtered by the date_creation column
  * @method     ChildAdmin findOneByDateMaj(string $date_maj) Return the first ChildAdmin filtered by the date_maj column
  *
@@ -72,6 +75,7 @@ use model\Map\AdminTableMap;
  * @method     ChildAdmin[]|ObjectCollection findByPrenom(string $prenom) Return ChildAdmin objects filtered by the prenom column
  * @method     ChildAdmin[]|ObjectCollection findByVille(string $ville) Return ChildAdmin objects filtered by the ville column
  * @method     ChildAdmin[]|ObjectCollection findByStatut(int $statut) Return ChildAdmin objects filtered by the statut column
+ * @method     ChildAdmin[]|ObjectCollection findByRole(string $role) Return ChildAdmin objects filtered by the role column
  * @method     ChildAdmin[]|ObjectCollection findByDateCreation(string $date_creation) Return ChildAdmin objects filtered by the date_creation column
  * @method     ChildAdmin[]|ObjectCollection findByDateMaj(string $date_maj) Return ChildAdmin objects filtered by the date_maj column
  * @method     ChildAdmin[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
@@ -165,7 +169,7 @@ abstract class AdminQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, uid, username, password, salt, nom, prenom, ville, statut, date_creation, date_maj FROM user_admin WHERE id = :p0';
+        $sql = 'SELECT id, uid, username, password, salt, nom, prenom, ville, statut, role, date_creation, date_maj FROM user_admin WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -538,6 +542,35 @@ abstract class AdminQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(AdminTableMap::COL_STATUT, $statut, $comparison);
+    }
+
+    /**
+     * Filter the query on the role column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByRole('fooValue');   // WHERE role = 'fooValue'
+     * $query->filterByRole('%fooValue%'); // WHERE role LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $role The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildAdminQuery The current query, for fluid interface
+     */
+    public function filterByRole($role = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($role)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $role)) {
+                $role = str_replace('*', '%', $role);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(AdminTableMap::COL_ROLE, $role, $comparison);
     }
 
     /**
