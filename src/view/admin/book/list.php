@@ -60,6 +60,28 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group"> 
+                                    <label class="col-sm-2 col-sm-2 control-label">Auteur</label>
+                                    <div class="col-sm-8">
+                                        <?php $authors = model\AuteurQuery::create()->find(); ?>
+                                        <select name="auteur_id" class="selectize">
+                                            <?php
+                                            echo '<option selected="selected"></option>';   
+                                            foreach ($authors as $author) {
+                                                if(isset($form['auteur_id']) && ($form['auteur_id']['data'] == $author->getId()))
+                                                {
+                                                   echo '<option selected="selected" value="'.$author->getId().'" >'.$author->getFullName().'</option>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="'.$author->getId().'">'.$author->getFullName().'</option>';   
+                                                }
+                                             } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Recherche</button>
                             <a href="<?php echo $view['router']->generate($route,array('action'=>'reset','datagrid'=>$datagrid->getName())) ?>" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> rafraichir</a>
                         </div>  
@@ -73,6 +95,7 @@
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'id','label'=>'#','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'nom','label'=>'Nom','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'genre','label'=>'Genre','route'=>$route,'datagrid'=>$datagrid)); ?></th>
+                                <th><?php echo $view->render('datagrid/macro.php', array('column'=>'auteurId','label'=>'Auteur','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'dateParution','label'=>'Date de parution','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th><?php echo $view->render('datagrid/macro.php', array('column'=>'prix','label'=>'Prix','route'=>$route,'datagrid'=>$datagrid)); ?></th>
                                 <th>Actions</th>
@@ -84,6 +107,7 @@
                                 <td><?php echo $book->getId(); ?></td>
                                 <td><?php echo $book->getNom(); ?></td>
                                 <td><?php echo $book->getGenre(); ?></td>
+                                <td><?php echo $book->getAuteur() ? $book->getAuteur()->getFullName() : ''; ?></td>
                                 <td><?php echo $book->getDateParution() ? $book->getDateParution()->format('Y-m-d') : ''; ?></td>
                                 <td><?php echo $book->getPrix(); ?></td>
                                 <td>

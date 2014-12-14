@@ -8,6 +8,7 @@ use model\Livre;
 use app\datagrid\BookDatagrid;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use model\LivreQuery;
+use model\AuteurQuery;
 
 class BookController extends BaseController
 {   
@@ -18,7 +19,7 @@ class BookController extends BaseController
         $bookDatagrid = new BookDatagrid(new UrlGenerator($this->routes, $this->requestContext),$request);
         $bookDatagrid->execute();
         
-        return $this->render('livre/list.php', 
+        return $this->render('admin/book/list.php', 
                 array('bookDatagrid' => $bookDatagrid,
                 ));
     }
@@ -40,6 +41,7 @@ class BookController extends BaseController
                 $book->setPrix($form['prix']);
                 $book->setGenre($form['genre']);
                 $book->setDateParution($form['date_parution']);
+                $book->setAuteurId($form['auteur_id']);
                 $book->save();
                 
                 $flashBag->add('success', 'livre '.$book->getNom().' crée avec succès');
@@ -52,8 +54,10 @@ class BookController extends BaseController
             }
         }
         
-        return $this->render('livre/new.php', 
-                array());
+        $authors = AuteurQuery::create()->find();
+        
+        return $this->render('admin/book/new.php', 
+                array('authors' => $authors));
     }
     
     public function editAction(Request $request)
@@ -78,9 +82,10 @@ class BookController extends BaseController
                 $book->setPrix($form['prix']);
                 $book->setGenre($form['genre']);
                 $book->setDateParution($form['date_parution']);
+                $book->setAuteurId($form['auteur_id']);
                 $book->save();
                 
-                $flashBag->add('success', 'Les livre '.$book->getNom().' a été mise à jour avec succès');
+                $flashBag->add('success', 'Le livre '.$book->getNom().' a été mise à jour avec succès');
                 
                 return $this->redirect($this->generateUrl('admin_book_list',array())); // Si il y a des paramêtres dans la route les mettre dans le tableau
             }
@@ -90,8 +95,10 @@ class BookController extends BaseController
             }
         }
         
-        return $this->render('livre/edit.php', 
-                array('book'=>$book));
+         $authors = AuteurQuery::create()->find();
+        
+        return $this->render('admin/book/edit.php', 
+                array('book'=>$book,'authors' => $authors));
     }
     
     public function showAction(Request $request)
@@ -105,7 +112,7 @@ class BookController extends BaseController
             return $this->exceptionNotFound("le livre n'existe pas !");
         }
         
-         return $this->render('livre/show.php', 
+         return $this->render('admin/book/show.php', 
                 array('book'=>$book));
     }
     

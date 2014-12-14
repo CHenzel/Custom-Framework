@@ -9,6 +9,21 @@
         <column name="genre" type="VARCHAR" required="true" />
         <column name="prix" type="INTEGER" required="true" />
         <column name="date_parution" type="DATE" required="true" />
+        <column name="auteur_id" type="integer" required="true" />
+        <foreign-key foreignTable="auteur" onDelete="cascade">
+            <reference local="auteur_id" foreign="id" />
+        </foreign-key>
+        <behavior name="timestampable">
+            <parameter name="create_column" value="date_creation" />
+            <parameter name="update_column" value="date_maj" />
+        </behavior>
+    </table>
+    
+    <table name="auteur" phpName="Auteur" allowPkInsert="true">
+        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
+        <column name="nom" type="VARCHAR" required="true" />
+        <column name="prenom" type="VARCHAR" required="true" />
+        <column name="date_naissance" type="DATE" required="true" />
         <behavior name="timestampable">
             <parameter name="create_column" value="date_creation" />
             <parameter name="update_column" value="date_maj" />

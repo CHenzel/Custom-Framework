@@ -235,6 +235,20 @@
                         </li>
                       </ul>
                   </li>
+                  <li class="sub-menu">
+                      <a class="<?php if(strpos($request->getPathInfo(), 'auteur')!== false) { echo'active'; } else { echo '';} ?>" href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Auteurs</span>
+                      </a>
+                      <ul class="sub">
+                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('admin_author_list'))!== false) { echo'active'; } else { echo '';} ?>">
+                            <a href="<?php echo $view['router']->generate('admin_author_list') ?>"><i class="fa fa-list"></i> Liste des auteurs</a>
+                        </li>
+                        <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('admin_author_new'))!== false) { echo'active'; } else { echo '';} ?>">
+                            <a href="<?php echo $view['router']->generate('admin_author_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un auteur</a>
+                        </li>
+                      </ul>
+                  </li>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -314,6 +328,7 @@
             $('.selectize').selectize();
             //moment().format();
             $('.datetime').datetimepicker({
+                minDate:'1/1/1800',
                 format: 'YYYY/MM/DD',
                 language: 'fr',
                 pickTime: false 

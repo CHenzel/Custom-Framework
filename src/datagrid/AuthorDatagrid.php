@@ -2,13 +2,13 @@
 namespace app\datagrid;
 
 use app\datagrid\BaseDatagrid;
-use model\LivreQuery;
+use model\AuteurQuery;
 /**
  * Description of BaseDatagrid
  *
  * @author gensky
  */
-class BookDatagrid extends BaseDatagrid
+class AuthorDatagrid extends BaseDatagrid
 {
     public function configureFilter()
     {
@@ -22,7 +22,7 @@ class BookDatagrid extends BaseDatagrid
                 'multiple' => false,
                 'data'   => "",
             ),
-            'genre' => array(
+            'prenom' => array(
                 //'type' => 'model',
                 //'type' => 'date',
                 //'type' => 'number',
@@ -31,21 +31,11 @@ class BookDatagrid extends BaseDatagrid
                 'multiple' => false,
                 'data'   => "",
             ),
-            'auteur_id' => array(
-                //'type' => 'model',
-                //'type' => 'date',
-                //'type' => 'number',
-                'type' => 'text',
-                'required' => false,
-                'multiple' => false,
-                'data'   => "",
-            ),
-            
         );
     }
     public function configureQuery() 
     {
-        return LivreQuery::create();
+        return AuteurQuery::create();
     }
 
     public function getDefaultSortColumn() 
@@ -55,7 +45,7 @@ class BookDatagrid extends BaseDatagrid
 
     public function getName() 
     {
-         return 'book';
+         return 'author';
     }
     
     public function getMaxPerPage() 

@@ -29,6 +29,23 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2 col-sm-2 control-label">Auteur</label>
+    <div class="col-sm-8">
+        <select name="auteur_id" class="selectize">
+            <?php foreach ($authors as $author) {
+                if(isset($book) && ($book->getAuteurId() == $author->getId()))
+                {
+                    echo '<option selected="selected" value="'.$author->getId().'" >'.$author->getFullName().'</option>';
+                }
+                else
+                {
+                    echo '<option value="'.$author->getId().'">'.$author->getFullName().'</option>';   
+                }
+             } ?>
+        </select>
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2 col-sm-2 control-label">Date de parution</label>
     <div class="col-sm-8"> 
         <div class='input-group date datetime'>

@@ -1,0 +1,26 @@
+#Book route
+admin_author_list:
+    path: /admin/auteur/liste/{action}/{datagrid}/{param1}/{param2}
+    defaults: { _controller: 'AuthorController::list', action: null, datagrid: null, param1: null, param2: null }
+admin_author_show:
+    path: /admin/auteur/{id}/fiche
+    defaults: { _controller: 'AuthorController::show' }
+admin_author_new:
+    path: /admin/auteur/nouveau
+    defaults: { _controller: 'AuthorController::new' }
+admin_author_edit:
+    path: /admin/auteur/{id}/modifier
+    defaults: { _controller: 'AuthorController::edit' }
+admin_author_delete:
+    path: /admin/auteur/{id}/supprimer
+    defaults: { _controller: 'AuthorController::delete' }
+
+#user_connexion:
+#    path: /utilisateur/connexion
+#    defaults: { _controller: 'UtilisateurController::connexion' }
+#user_deconnexion:
+#    path: /utilisateur/deconnexion
+#    defaults: { _controller: 'UtilisateurController::deconnexion' }
+#user_inscription:
+#    path: /utilisateur/inscription
+#    defaults: { _controller: 'UtilisateurController::inscription' }

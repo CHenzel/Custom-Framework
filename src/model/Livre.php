@@ -16,5 +16,10 @@ use model\Base\Livre as BaseLivre;
  */
 class Livre extends BaseLivre
 {
-
+    public function getFullName()
+    {
+        $dateParution = $this->getDateParution() ? $this->getDateParution()->format('Y-m-d') : '- - -';
+        $fullName = $this->getNom().' '.$this->getGenre().' ('.$dateParution .')';
+        return $fullName;
+    }
 }
