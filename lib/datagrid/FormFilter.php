@@ -16,29 +16,72 @@ class FormFilter
     
     protected $name;
     
+    protected $data = array();
+    
+    protected $filters = array();
+    
     public function __construct($filters, $name,$data)
     {
         $this->name = 'filter_'.$name;
-        foreach ($filters as $key => $filter) 
+        $this->filters = $filters;
+        $this->data = $data;
+        $this->updateBuilder();
+    }
+    
+    public function updateBuilder($data=null)
+    {
+        if($data == null)
+        {
+            $data = $this->data;
+        }
+        $name = $this->name;
+        
+        foreach ($this->filters as $key => $filter) 
         {
             if($data[$key])
             {
                 $filter['data']=$data[$key];
-                $this->builder['filter_'.$name] = array($key => $filter) ;
+                $this->builder[$name][$key] = $filter;
             }
             else
             {
-                $this->builder['filter_'.$name] = array($key => $filter);
+                $this->builder[$name][$key] = $filter;
             }
         }
+    }
+    
+    public function resetBuilder($data=null)
+    {
+        $name = $this->name;
+        
+        foreach ($this->filters as $key => $filter) 
+        {
+            if($data != null)
+            {
+                if($data[$key])
+                {
+                    $filter['data']=$data[$key];
+                    $this->builder[$name] = array($key => $filter) ;
+                }
+            }
+            else
+            {
+                $filter['data']="";
+                $this->builder[$name] = array($key => $filter);
+            }
+        } 
+    }
+    
+    
+    public function getBuilder()
+    {
+        return $this->builder;
     }
     
     public function getName()
     {
         return $this->name;
     }
-    
-    
     
     
 //    public function add($name, $type, $options = array(), $value = null)
@@ -62,10 +105,6 @@ class FormFilter
 //        return $this->data;
 //    }
 //    
-    public function getBuilder()
-    {
-        return $this->builder;
-    }
 //    
 //    public function getForm()
 //    {   

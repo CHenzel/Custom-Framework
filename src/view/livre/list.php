@@ -4,8 +4,6 @@
     $datagrid = $bookDatagrid;
     $books = $datagrid->getResults();
     $form = $datagrid->getFilterFormView();
-    
-    var_dump($form);
 ?>
 <h3><i class="fa fa-angle-right"></i> Livre - Liste</h3>
 <div class="row">
@@ -29,15 +27,41 @@
     <div class="col-md-12">
         <div class="content-panel">
             <div class="panel-body">
-                <form name="filter_book" action="<?php echo $view['router']->generate($route) ?>" method="post" class="form-inline">
+                <form name="filter_book" action="<?php echo $view['router']->generate($route) ?>" method="post" class="form-horizontal filter-form">
                     <div class="row">
-                        <div class="col-lg-3">
-                                <label class="col-sm-2 col-sm-2 control-label">Nom</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" name="nom" value="<?php echo isset($form['nom']) ? $form['nom']['data'] : ''; ?>">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="form-group"> 
+                                    <label class="col-sm-2 col-sm-2 control-label">Nom</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" name="nom" value="<?php echo isset($form['nom']) ? $form['nom']['data'] : ''; ?>">
+                                    </div>
                                 </div>
+                            </div>
+                            <?php $genres = array('Roman','Science-fiction','Fantastique','Autobiographie'); //Peux être remplacé par referentiel en base ?>
+                            <div class="col-md-4">
+                                <div class="form-group"> 
+                                    <label class="col-sm-2 col-sm-2 control-label">Genre</label>
+                                    <div class="col-sm-8">
+                                        <select name="genre" class="selectize">
+                                            <?php
+                                            echo '<option selected="selected"></option>';   
+                                            foreach ($genres as $genre) {
+                                                if(isset($form['genre']) && ($form['genre']['data'] == $genre))
+                                                {
+                                                    echo '<option selected="selected">'.$genre.'</option>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<option>'.$genre.'</option>';   
+                                                }
+                                             } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search"></i> Recherche</button>
-                            <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> rafraichir</a>
+                            <a href="<?php echo $view['router']->generate($route,array('action'=>'reset','datagrid'=>$datagrid->getName())) ?>" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> rafraichir</a>
                         </div>  
                     </div>
                 </form>

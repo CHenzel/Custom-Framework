@@ -21,8 +21,15 @@ class BookDatagrid extends BaseDatagrid
                 'required' => false,
                 'multiple' => false,
                 'data'   => "",
-                //'value' => "",
-                'place_holder' => 'Sélectionnez un type',
+            ),
+            'genre' => array(
+                //'type' => 'model',
+                //'type' => 'date',
+                //'type' => 'number',
+                'type' => 'text',
+                'required' => false,
+                'multiple' => false,
+                'data'   => "",
             ),
         );
     }
