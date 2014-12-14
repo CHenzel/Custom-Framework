@@ -25,7 +25,8 @@ catalog.xml
 .htpasswd
 propel
 propel.yml
-model/Base/
+src/model/Base/
+src/model/Map/
 model/Map/
 config/propel.yml
 config/generated-conf/config.php
