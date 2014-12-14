@@ -4,10 +4,7 @@ namespace lib\datagrid;
 
 use lib\datagrid\PropelDatagridInterface;
 use PropelCollection;
-use PropelQuery;
-use Symfony\Component\DependencyInjection\Container;
 //use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Datagrid management class that support and handle pagination, sort, filter
@@ -17,20 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class PropelDatagrid implements PropelDatagridInterface
 {
     /**
-     * The container witch is usefull to get Request parameters and differents 
-     * options and parameters.
-     * @var Container
-     */
-    //protected $container;
-    
-    /**
      * The query that filter the results
      * @var \PropelQuery 
      */
     protected $query;
     
     /**
-     * @var FilterObject
+     * @var FromFilter
      */
     protected $filter;
     
@@ -60,24 +50,21 @@ abstract class PropelDatagrid implements PropelDatagridInterface
     
     public function __construct(/*$container,*/ $generator,$request,$options = array())
     {
-        //$this->container = $container;
         $this->request = $request;
         $this->query = $this->configureQuery();
         $this->options = $options;
         $this->generator = $generator;
-        //$this->buildForm();
+        $this->buildForm();
     }
     
     /**
      * @param type $container
      * @return \self
      */
-    public static function create(/*$container*/)
+    public static function create()
     {
         $class = get_called_class();
         return new $class();
-//        return new $class($container);
-        
     }
     
     public function execute()
@@ -88,7 +75,8 @@ abstract class PropelDatagrid implements PropelDatagridInterface
         {
             $this->reset();
         }
-        //$this->filter();
+       
+        $this->filter();
         $this->sort();
         
         //var_dump($this->getQuery()->toString()); die('oki');
@@ -112,27 +100,33 @@ abstract class PropelDatagrid implements PropelDatagridInterface
     
     private function filter()
     {
-        if($this->getRequest()->isMethod('post') && $this->getRequest()->get($this->filter->getForm()->getName()))
+        if($this->getRequest()->isMethod('post') /*&& $this->getRequest()->get($this->filter->getName())*/)
         {
-            $data = $this->getRequest()->get($this->filter->getForm()->getName());
+            $data = $this->getRequest()->request->all();
         }
         else
         {
             $data = $this->getRequest()->getSession()->get($this->getSessionName().'.filter', $this->getDefaultFilters());
         }
         
-        $this->filter->submit($data);
-        $form = $this->filter->getForm();
-        $formData = $form->getData();
+        //Faire le sessions
         
-        if($form->isValid())
-        {
-            if($this->getRequest()->isMethod('post'))
-            {
-                $this->getRequest()->getSession()->set($this->getSessionName().'.filter', $data);
-            }
-            $this->applyFilter($formData);
-        }
+        $this->getRequest()->getSession()->set($this->getSessionName().'.filter', $data);
+        
+        $this->applyFilter($data);
+        
+//        $this->filter->submit($data);
+//        $form = $this->filter->getForm();
+//        $formData = $form->getData();
+//        
+//        if($form->isValid())
+//        {
+//            if($this->getRequest()->isMethod('post'))
+//            {
+//                $this->getRequest()->getSession()->set($this->getSessionName().'.filter', $data);
+//            }
+//            $this->applyFilter($formData);
+//        }
         
         return $this;
     }
@@ -158,8 +152,10 @@ abstract class PropelDatagrid implements PropelDatagridInterface
             if(!$empty)
             {
                 //$method = 'filterBy'.$this->container->get('spyrit.util.inflector')->camelize($key);
-                $method = 'filterBy'.$key;
-                if($this->filter->getType($key) === 'text')
+                $method = 'filterBy'.ucfirst($key);
+                $formView = $this->configureFilter();
+                
+                if($formView[$key]['type'] === 'text')
                 {
                     $this->getQuery()->$method('%'.$value.'%', \Criteria::LIKE);
                 }
@@ -188,8 +184,6 @@ abstract class PropelDatagrid implements PropelDatagridInterface
             $this->getSession()->set($namespace, $sort);
         }
         $method = 'orderBy'.ucfirst($sort['column']);
-        
-       // var_dump($sort['order']); die();
         
         try
         {
@@ -255,15 +249,11 @@ abstract class PropelDatagrid implements PropelDatagridInterface
         
         if(!empty($filters))
         {
-            $this->filter = new FilterObject($this->getFormFactory(), $this->getName());
-            
-            foreach($filters as $name => $filter)
-            {
-                $this->filter->add($name, $filter['type'], isset($filter['options'])? $filter['options'] : array(), isset($filter['value'])? $filter['value'] : null);
-            }
-            
-            $this->configureFilterBuilder($this->filter->getBuilder());
+            $data = $this->getRequest()->getSession()->get($this->getSessionName().'.filter', $this->getDefaultFilters());
+       
+            $this->filter = new FormFilter($filters,$this->getName(),$data);
         }
+        $this->configureFilterBuilder($this->filter);
     }
     
     public function configureFilter()
@@ -271,42 +261,44 @@ abstract class PropelDatagrid implements PropelDatagridInterface
         return array();
     }
     
-    /**
-     * @param type $name
-     * @param type $params
-     * @return self
-     */
-    public function export($name, $params = array())
-    {
-        $class = $this->getExport($name);
-        $this->filter();
-        $this->sort();
-        
-        $export = new $class($this->getQuery(), $params);
-        return $export->execute();
-    }
-    
-    protected function getExport($name)
-    {
-        $exports = $this->getExports();
-        if(!isset($exports[$name]))
-        {
-            throw new \Exception('The "'.$name.'" export doesn\'t exist in this datagrid.');
-        }
-        return $exports[$name];
-    }
-    
-    protected function getExports()
-    {
-        return array();
-    }
+//    /**
+//     * @param type $name
+//     * @param type $params
+//     * @return self
+//     */
+//    public function export($name, $params = array())
+//    {
+//        $class = $this->getExport($name);
+//        $this->filter();
+//        $this->sort();
+//        
+//        $export = new $class($this->getQuery(), $params);
+//        return $export->execute();
+//    }
+//    
+//    protected function getExport($name)
+//    {
+//        $exports = $this->getExports();
+//        if(!isset($exports[$name]))
+//        {
+//            throw new \Exception('The "'.$name.'" export doesn\'t exist in this datagrid.');
+//        }
+//        return $exports[$name];
+//    }
+//    
+//    protected function getExports()
+//    {
+//        return array();
+//    }
     
     /**
      * Shortcut 
      */
     public function getFilterFormView()
     {
-        return $this->filter->getForm()->createView();
+        //return $this->filter->getForm()->createView();
+        $filter = $this->filter->getBuilder();
+        return $filter[$this->filter->getName()];
     }
     
     public function getMaxPerPage()

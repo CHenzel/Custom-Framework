@@ -25,6 +25,7 @@
         <column name="prenom" type="VARCHAR" required="false" />
         <column name="ville" type="VARCHAR" required="false" />
         <column name="statut" type="INTEGER" />
+        <column name="role" type="VARCHAR"/>
         <behavior name="timestampable">
             <parameter name="create_column" value="date_creation" />
             <parameter name="update_column" value="date_maj" />

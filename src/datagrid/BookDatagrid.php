@@ -13,7 +13,17 @@ class BookDatagrid extends BaseDatagrid
     public function configureFilter()
     {
         return array(
-            
+            'nom' => array(
+                //'type' => 'model',
+                //'type' => 'date',
+                //'type' => 'number',
+                'type' => 'text',
+                'required' => false,
+                'multiple' => false,
+                'data'   => "",
+                //'value' => "",
+                'place_holder' => 'Sélectionnez un type',
+            ),
         );
     }
     public function configureQuery() 

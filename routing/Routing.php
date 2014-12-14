@@ -81,7 +81,7 @@ class Routing
         
         $parameters = $matcher->match($request->getPathInfo());
         
-        $this->security->configure($request,$requestContext,$this->routes);
+        $this->security->configure($request/*,$requestContext,$this->routes*/);
         
         $response = $this->security->accessCheck($request->getPathInfo());
         

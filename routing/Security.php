@@ -16,19 +16,19 @@ class Security
     protected $providers;
     protected $user;
     protected $request;
-    protected $routes;
-    protected $requestContext;
+    //protected $routes;
+    //protected $requestContext;
 
     public function __construct()
     {
         
     }
     
-    public function configure($request,$requestContext,$routes)
+    public function configure($request/*,$requestContext,$routes*/)
     {
         $this->request = $request;
-        $this->requestContext = $requestContext;
-        $this->routes = $routes;
+        //$this->requestContext = $requestContext;
+        //$this->routes = $routes;
         $this->user = $request->getSession()->get('user');
         $this->parseYmlFile();
     }
