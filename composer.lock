@@ -4,76 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c771091afe7517959f65eb8bc8064521",
+    "hash": "d6414a829450ccf5d85a8256145e3ad2",
     "packages": [
         {
-            "name": "csanquer/colibri-csv",
-            "version": "v1.0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/csanquer/colibri-csv.git",
-                "reference": "b83b912873973fb08c7e7ad63af7b066a0c7be29"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/csanquer/colibri-csv/zipball/b83b912873973fb08c7e7ad63af7b066a0c7be29",
-                "reference": "b83b912873973fb08c7e7ad63af7b066a0c7be29",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "doctrine/inflector": "~1.0",
-                "fzaninotto/faker": "~1.3",
-                "satooshi/php-coveralls": "dev-master",
-                "symfony/stopwatch": "~2.4"
-            },
-            "suggest": {
-                "ext-iconv": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "CSanquer\\ColibriCsv\\": "src/",
-                    "CSanquer\\ColibriCsv\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Charles SANQUER",
-                    "email": "charles.sanquer@gmail.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "Lightweight and performant CSV reader and writer library",
-            "keywords": [
-                "csv",
-                "export",
-                "import",
-                "parser",
-                "reader",
-                "writer"
-            ],
-            "time": "2014-05-20 08:52:48"
-        },
-        {
             "name": "doctrine/annotations",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "6a6bec0670bb6e71a263b08bc1b98ea242928633"
+                "reference": "d63108433190110c0ceb8be6460dda6f78348950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/6a6bec0670bb6e71a263b08bc1b98ea242928633",
-                "reference": "6a6bec0670bb6e71a263b08bc1b98ea242928633",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/d63108433190110c0ceb8be6460dda6f78348950",
+                "reference": "d63108433190110c0ceb8be6460dda6f78348950",
                 "shasum": ""
             },
             "require": {
@@ -128,7 +72,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2014-09-25 16:45:30"
+            "time": "2014-12-18 18:30:08"
         },
         {
             "name": "doctrine/cache",
@@ -462,106 +406,17 @@
             "time": "2013-01-12 18:59:04"
         },
         {
-            "name": "phing/phing",
-            "version": "2.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phingofficial/phing.git",
-                "reference": "393edeffa8a85d43636ce0c9b4deb1ff9ac60a5c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/393edeffa8a85d43636ce0c9b4deb1ff9ac60a5c",
-                "reference": "393edeffa8a85d43636ce0c9b4deb1ff9ac60a5c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "require-dev": {
-                "ext-pdo_sqlite": "*",
-                "lastcraft/simpletest": "@dev",
-                "pdepend/pdepend": "1.x",
-                "pear-pear.php.net/http_request2": "2.2.x",
-                "pear-pear.php.net/net_growl": "2.7.x",
-                "pear-pear.php.net/pear_packagefilemanager": "1.7.x",
-                "pear-pear.php.net/pear_packagefilemanager2": "1.0.x",
-                "pear-pear.php.net/xml_serializer": "0.20.x",
-                "pear/pear_exception": "@dev",
-                "pear/versioncontrol_git": "@dev",
-                "pear/versioncontrol_svn": "@dev",
-                "phpdocumentor/phpdocumentor": "2.x",
-                "phploc/phploc": "2.x",
-                "phpunit/phpunit": ">=3.7",
-                "sebastian/phpcpd": "2.x",
-                "squizlabs/php_codesniffer": "1.5.x"
-            },
-            "suggest": {
-                "pdepend/pdepend": "PHP version of JDepend",
-                "pear/archive_tar": "Tar file management class",
-                "pear/versioncontrol_git": "A library that provides OO interface to handle Git repository",
-                "pear/versioncontrol_svn": "A simple OO-style interface for Subversion, the free/open-source version control system",
-                "phpdocumentor/phpdocumentor": "Documentation Generator for PHP",
-                "phploc/phploc": "A tool for quickly measuring the size of a PHP project",
-                "phpmd/phpmd": "PHP version of PMD tool",
-                "phpunit/php-code-coverage": "Library that provides collection, processing, and rendering functionality for PHP code coverage information",
-                "phpunit/phpunit": "The PHP Unit Testing Framework",
-                "sebastian/phpcpd": "Copy/Paste Detector (CPD) for PHP code",
-                "tedivm/jshrink": "Javascript Minifier built in PHP"
-            },
-            "bin": [
-                "bin/phing"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.9.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "classes/phing/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "classes"
-            ],
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Phing Community",
-                    "homepage": "http://www.phing.info/trac/wiki/Development/Contributors"
-                },
-                {
-                    "name": "Michiel Rook",
-                    "email": "mrook@php.net"
-                }
-            ],
-            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
-            "homepage": "http://www.phing.info/",
-            "keywords": [
-                "build",
-                "phing",
-                "task",
-                "tool"
-            ],
-            "time": "2014-12-03 09:18:46"
-        },
-        {
             "name": "propel/propel",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/propelorm/Propel2.git",
-                "reference": "7a2f79ea6fe2d2f4b0ac2c9ba0d49086d459aac5"
+                "reference": "40d0bab06c738e6a5a7c5319fb5a7c549f5e84b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/propelorm/Propel2/zipball/7a2f79ea6fe2d2f4b0ac2c9ba0d49086d459aac5",
-                "reference": "7a2f79ea6fe2d2f4b0ac2c9ba0d49086d459aac5",
+                "url": "https://api.github.com/repos/propelorm/Propel2/zipball/40d0bab06c738e6a5a7c5319fb5a7c549f5e84b1",
+                "reference": "40d0bab06c738e6a5a7c5319fb5a7c549f5e84b1",
                 "shasum": ""
             },
             "require": {
@@ -613,117 +468,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2014-12-04 16:26:55"
-        },
-        {
-            "name": "propel/propel-bundle",
-            "version": "1.4.4",
-            "target-dir": "Propel/PropelBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/propelorm/PropelBundle.git",
-                "reference": "0aee6aa0c952fde9eadc512936a3f5af07a56306"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/propelorm/PropelBundle/zipball/0aee6aa0c952fde9eadc512936a3f5af07a56306",
-                "reference": "0aee6aa0c952fde9eadc512936a3f5af07a56306",
-                "shasum": ""
-            },
-            "require": {
-                "propel/propel1": "~1.6",
-                "symfony/symfony": "~2.4"
-            },
-            "require-dev": {
-                "fzaninotto/faker": "dev-master",
-                "sensio/framework-extra-bundle": "~3.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Propel\\PropelBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William Durand",
-                    "email": "william.durand1@gmail.com"
-                }
-            ],
-            "description": "Integration of Propel in Symfony2",
-            "keywords": [
-                "orm",
-                "persistence",
-                "propel"
-            ],
-            "time": "2014-10-01 15:25:21"
-        },
-        {
-            "name": "propel/propel1",
-            "version": "1.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/propelorm/Propel.git",
-                "reference": "af527736586388c21a5a0a5f97914e7264fe580c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/propelorm/Propel/zipball/af527736586388c21a5a0a5f97914e7264fe580c",
-                "reference": "af527736586388c21a5a0a5f97914e7264fe580c",
-                "shasum": ""
-            },
-            "require": {
-                "phing/phing": "~2.4",
-                "php": ">=5.2.4"
-            },
-            "require-dev": {
-                "pear-pear.php.net/pear_packagefilemanager2": "@stable"
-            },
-            "bin": [
-                "generator/bin/propel-gen",
-                "generator/bin/propel-gen.bat"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.7-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "runtime/lib",
-                    "generator/lib"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "runtime/lib",
-                "generator/lib"
-            ],
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William Durand",
-                    "email": "william.durand1@gmail.com",
-                    "homepage": "http://www.willdurand.fr"
-                }
-            ],
-            "description": "Propel is an open-source Object-Relational Mapping (ORM) for PHP5.",
-            "homepage": "http://www.propelorm.org/",
-            "keywords": [
-                "Active Record",
-                "database",
-                "mapping",
-                "orm",
-                "persistence"
-            ],
-            "time": "2014-02-25 09:13:58"
+            "time": "2014-12-19 15:38:36"
         },
         {
             "name": "psr/log",
@@ -764,83 +509,18 @@
             "time": "2012-12-21 11:40:51"
         },
         {
-            "name": "spyrit/propel-datagrid-bundle",
-            "version": "dev-master",
-            "target-dir": "Spyrit/PropelDatagridBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spyrit/PropelDatagridBundle.git",
-                "reference": "742f29f020c21662d4797133ffbb4f805ac292e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spyrit/PropelDatagridBundle/zipball/742f29f020c21662d4797133ffbb4f805ac292e1",
-                "reference": "742f29f020c21662d4797133ffbb4f805ac292e1",
-                "shasum": ""
-            },
-            "require": {
-                "csanquer/colibri-csv": "1.0.*",
-                "php": ">=5.3.3",
-                "propel/propel-bundle": ">=1.2",
-                "symfony/symfony": ">=2.3"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.2,>=2.2.3",
-                "phpunit/phpunit": "4.2.*",
-                "propel/propel-bundle": ">=1.2",
-                "sensio/distribution-bundle": "~3.0",
-                "sensio/framework-extra-bundle": "~3.0",
-                "sensio/generator-bundle": "~2.3",
-                "symfony/assetic-bundle": "~2.3",
-                "symfony/monolog-bundle": "~2.4",
-                "symfony/swiftmailer-bundle": "~2.3",
-                "twig/extensions": "~1.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Spyrit\\PropelDatagridBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maxime Corson",
-                    "email": "maxime.corson@spyrit.net",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Charles Henzel",
-                    "email": "charles.henzel@spyrit.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Symfony2 Datagrid Bundle for Propel.",
-            "homepage": "https://github.com/spyrit/DatagridBundle.git",
-            "keywords": [
-                "datagrid",
-                "propel",
-                "symfony"
-            ],
-            "time": "2014-10-15 08:07:45"
-        },
-        {
             "name": "symfony/filesystem",
             "version": "2.7.x-dev",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "c515060ae3829eee36cc22bc416fa60cc5656d8a"
+                "reference": "1ff6caf45e7c5aac036b1536a914afbf4b8c6066"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c515060ae3829eee36cc22bc416fa60cc5656d8a",
-                "reference": "c515060ae3829eee36cc22bc416fa60cc5656d8a",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/1ff6caf45e7c5aac036b1536a914afbf4b8c6066",
+                "reference": "1ff6caf45e7c5aac036b1536a914afbf4b8c6066",
                 "shasum": ""
             },
             "require": {
@@ -873,7 +553,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-08 08:43:57"
+            "time": "2014-12-12 16:23:01"
         },
         {
             "name": "symfony/finder",
@@ -882,12 +562,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "8ba2d848ae7952b01f2d2b6343fef2abe44ca196"
+                "reference": "5f69e63177e3cb369040f3facbb21bb87da114bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/8ba2d848ae7952b01f2d2b6343fef2abe44ca196",
-                "reference": "8ba2d848ae7952b01f2d2b6343fef2abe44ca196",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/5f69e63177e3cb369040f3facbb21bb87da114bc",
+                "reference": "5f69e63177e3cb369040f3facbb21bb87da114bc",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +600,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-02 20:19:50"
+            "time": "2014-12-12 16:23:01"
         },
         {
             "name": "symfony/http-foundation",
@@ -929,12 +609,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "f7153d9322eb5f0aeea7e3b2a38fc74d4ef42f95"
+                "reference": "a09008ca2e41966aad229c350c09c859c930a11f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/f7153d9322eb5f0aeea7e3b2a38fc74d4ef42f95",
-                "reference": "f7153d9322eb5f0aeea7e3b2a38fc74d4ef42f95",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/a09008ca2e41966aad229c350c09c859c930a11f",
+                "reference": "a09008ca2e41966aad229c350c09c859c930a11f",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +653,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-08 08:44:04"
+            "time": "2014-12-13 08:39:06"
         },
         {
             "name": "symfony/routing",
@@ -982,12 +662,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "36bc15e02d9f50b22a06de130f3589976b3c5f1b"
+                "reference": "00ed146af829e4c4b5c63be49dfb37dfe195ee3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/36bc15e02d9f50b22a06de130f3589976b3c5f1b",
-                "reference": "36bc15e02d9f50b22a06de130f3589976b3c5f1b",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/00ed146af829e4c4b5c63be49dfb37dfe195ee3c",
+                "reference": "00ed146af829e4c4b5c63be49dfb37dfe195ee3c",
                 "shasum": ""
             },
             "require": {
@@ -995,11 +675,12 @@
             },
             "require-dev": {
                 "doctrine/annotations": "~1.0",
+                "doctrine/common": "~2.2",
                 "psr/log": "~1.0",
                 "symfony/config": "~2.2",
                 "symfony/expression-language": "~2.4",
                 "symfony/http-foundation": "~2.3",
-                "symfony/yaml": "~2.0"
+                "symfony/yaml": "~2.0,>=2.0.5"
             },
             "suggest": {
                 "doctrine/annotations": "For using the annotation loader",
@@ -1040,7 +721,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-12-08 08:44:04"
+            "time": "2014-12-16 20:28:59"
         },
         {
             "name": "symfony/symfony",
@@ -1278,8 +959,7 @@
         "symfony/templating": 20,
         "symfony/http-foundation": 20,
         "symfony/finder": 20,
-        "symfony/filesystem": 20,
-        "spyrit/propel-datagrid-bundle": 20
+        "symfony/filesystem": 20
     },
     "prefer-stable": false,
     "platform": [],

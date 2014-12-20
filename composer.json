@@ -1,12 +1,21 @@
 {
+    "name": "CHenzel/Custom-Framework",
+    "description": "Custom Framework with symdony 2 components",
+    "homepage": "https://github.com/CHenzel/Custom-Framework",
+    "license": "GPL V3",
+    "authors": [
+        {
+            "name": "CHENZEL Custom Framework",
+            "homepage": "http://chenzel.github.io/Custom-Framework"
+        }
+    ],
     "require": {
         "propel/propel": "2.0.*@dev",
         "symfony/routing": "3.0.*@dev",
         "symfony/templating": "3.0.*@dev",
         "symfony/http-foundation": "3.0.*@dev",
         "symfony/finder": "2.7.*@dev",
-        "symfony/filesystem": "2.7.*@dev",
-        "spyrit/propel-datagrid-bundle": "dev-master"
+        "symfony/filesystem": "2.7.*@dev"
     },
     "autoload": {
         "classmap": ["src/model/"],
