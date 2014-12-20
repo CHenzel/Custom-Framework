@@ -1,4 +1,0 @@
-#Front route
-home:
-    path: /
-    defaults: { _controller: 'FrontController::index' }
