@@ -16,5 +16,21 @@ use model\Base\Admin as BaseAdmin;
  */
 class Admin extends BaseAdmin
 {
-
+    const USER_SUPER_ADMIN = 1;
+    const USER_ADMIN = 2;
+    
+    public function getRoleLabel()
+    {
+        switch($this->getRole())
+        {
+            case self::USER_SUPER_ADMIN:
+                $roleLabel = 'Super Admin';
+            break;
+            case self::USER_ADMIN:
+                $roleLabel = 'Admin';
+            break;
+        }
+        
+        return $roleLabel;
+    }
 }

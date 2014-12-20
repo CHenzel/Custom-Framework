@@ -213,7 +213,8 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="#"><img src="<?php echo $view['assets']->getUrl('dashgum/img/ui-sam.jpg') ?>" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">Support</h5>
+                  <h5 class="centered"><?php echo $user->getUserName() ?></h5>
+                  <p class="centered"><?php echo $user->getRoleLabel() ?></p>
               	  	
                   <li class="mt">
                       <a class="<?php if($request->getPathInfo() == $view['router']->generate('admin_home')) { echo'active'; } else { echo '';} ?>" href="<?php echo $view['router']->generate('admin_home') ?>">
@@ -237,7 +238,7 @@
                   </li>
                   <li class="sub-menu">
                       <a class="<?php if(strpos($request->getPathInfo(), 'auteur')!== false) { echo'active'; } else { echo '';} ?>" href="javascript:;" >
-                          <i class="fa fa-book"></i>
+                          <i class="fa fa-users"></i>
                           <span>Auteurs</span>
                       </a>
                       <ul class="sub">
@@ -304,7 +305,7 @@
     <!--<script src="assets/js/sparkline-chart.js"></script>    
     <script src="assets/js/zabuto_calendar.js"></script>-->
     <script type="text/javascript">
-        $(document).ready(function () {
+       /* $(document).ready(function () {
         var unique_id = $.gritter.add({
             // (string | mandatory) the heading of the notification
             title: 'Welcome to Dashgum!',
@@ -321,7 +322,7 @@
         });
 
         return false;
-        });
+        });*/
     </script>
     <script type="text/javascript">
         $(document).ready(function () {

@@ -11,3 +11,18 @@ admin_home:
 admin_profil:
     path: /admin/profile
     defaults: { _controller: 'AdminController::profil' }
+admin_admin_list:
+    path: /admin/admin/liste/{action}/{datagrid}/{param1}/{param2}
+    defaults: { _controller: 'AdminController::list', action: null, datagrid: null, param1: null, param2: null }
+admin_admin_show:
+    path: /admin/admin/{id}/fiche
+    defaults: { _controller: 'AdminController::show' }
+admin_admin_new:
+    path: /admin/admin/nouveau
+    defaults: { _controller: 'AdminController::new' }
+admin_admin_edit:
+    path: /admin/admin/{id}/modifier
+    defaults: { _controller: 'AdminController::edit' }
+admin_admin_delete:
+    path: /admin/admin/{id}/supprimer
+    defaults: { _controller: 'AdminController::delete' }
