@@ -1,4 +1,4 @@
 ## YAML Template.
-admin_home:
-    path: /
-    defaults: { _controller: 'defaultController::index' }
+home:
+    path: /{name}
+    defaults: { _controller: 'DefaultController::index' }

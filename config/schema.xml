@@ -2,8 +2,10 @@
 <database name="custom_framework" namespace="model" defaultIdMethod="native"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd" >
+<!-- Go to propel documentation -->
 
-    <table name="livre" phpName="Livre" allowPkInsert="true">
+<!-- Exemple from demo branch -->
+    <!--<table name="livre" phpName="Livre" allowPkInsert="true">
         <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
         <column name="nom" type="VARCHAR" required="true" />
         <column name="genre" type="VARCHAR" required="true" />
@@ -17,33 +19,5 @@
             <parameter name="create_column" value="date_creation" />
             <parameter name="update_column" value="date_maj" />
         </behavior>
-    </table>
-    
-    <table name="auteur" phpName="Auteur" allowPkInsert="true">
-        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
-        <column name="nom" type="VARCHAR" required="true" />
-        <column name="prenom" type="VARCHAR" required="true" />
-        <column name="date_naissance" type="DATE" required="true" />
-        <behavior name="timestampable">
-            <parameter name="create_column" value="date_creation" />
-            <parameter name="update_column" value="date_maj" />
-        </behavior>
-    </table>
-
-    <table name="user_admin" phpName="Admin" allowPkInsert="true">
-        <column name="id" type="INTEGER" primaryKey="true" autoIncrement="true" />
-        <column name="uid" phpName="Uid" type="VARCHAR" size="50" required="true"/>
-        <column name="username" type="VARCHAR" required="true" />
-        <column name="password" type="VARCHAR" required="true" />
-        <column name="salt" type="VARCHAR" required="true" />
-        <column name="nom" type="VARCHAR" required="false" />
-        <column name="prenom" type="VARCHAR" required="false" />
-        <column name="ville" type="VARCHAR" required="false" />
-        <column name="statut" type="INTEGER" />
-        <column name="role" type="VARCHAR"/>
-        <behavior name="timestampable">
-            <parameter name="create_column" value="date_creation" />
-            <parameter name="update_column" value="date_maj" />
-        </behavior>          
-    </table>
+    </table>-->
 </database>
