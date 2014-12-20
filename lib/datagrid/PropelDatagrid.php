@@ -2,8 +2,10 @@
 
 namespace lib\datagrid;
 
+use Exception;
 use lib\datagrid\PropelDatagridInterface;
 use lib\utils;
+use Propel\Runtime\ActiveQuery\Criteria;
 use PropelCollection;
 //use Symfony\Component\Form\FormFactory;
 
@@ -152,7 +154,7 @@ abstract class PropelDatagrid implements PropelDatagridInterface
                 
                 if($formView[$key]['type'] === 'text')
                 {
-                    $this->getQuery()->$method('%'.$value.'%', \Criteria::LIKE);
+                    $this->getQuery()->$method('%'.$value.'%', Criteria::LIKE);
                 }
                 else
                 {
@@ -184,9 +186,9 @@ abstract class PropelDatagrid implements PropelDatagridInterface
         {
             $this->getQuery()->$method($sort['order']);
         }
-        catch(\Exception $e)
+        catch(Exception $e)
         {
-            throw new \Exception('There is no method "'.$method.'" to sort the datagrid on column "'.$sort['column'].'". Just create it in the "'.get_class($this->query).'" object.');
+            throw new Exception('There is no method "'.$method.'" to sort the datagrid on column "'.$sort['column'].'". Just create it in the "'.get_class($this->query).'" object.');
         }
     }
     
@@ -345,7 +347,7 @@ abstract class PropelDatagrid implements PropelDatagridInterface
     
     public function getDefaultSortOrder()
     {
-        return strtolower(\Criteria::ASC);
+        return strtolower(Criteria::ASC);
     }
     
     public function configureFilterForm()
