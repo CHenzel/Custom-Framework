@@ -54,21 +54,22 @@ class Security
     {
         foreach ($this->providers as $provider) 
         {
-            foreach ($provider as $key => $value) 
+            if(count($provider) > 0)
             {
-                $pattern = $value['pattern'];
-                if(preg_match($pattern, $uri, $m))
+                foreach ($provider as $key => $value) 
                 {
-                    $object = $value['provider'];
-                    $urlLogin = $value['login_path'];
-                    
-                    if((($this->user !== null) && !($this->user instanceof $object)) || $this->user==null)
+                    $pattern = $value['pattern'];
+                    if(preg_match($pattern, $uri, $m))
                     {
-//                        $generator = new UrlGenerator($this->routes, $this->requestContext);
-//                        return new RedirectResponse($generator->generate($urlLogin,array()), 302);
-                        return $urlLogin;
-                    }
+                        $object = $value['provider'];
+                        $urlLogin = $value['login_path'];
 
+                        if((($this->user !== null) && !($this->user instanceof $object)) || $this->user==null)
+                        {
+                            return $urlLogin;
+                        }
+
+                    }
                 }
             }
         }

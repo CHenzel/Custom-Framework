@@ -24,22 +24,22 @@ propel:
       migrationDir: config/generated-migration
   database:
       connections:
-          custom_framework:
+          custom_framework_demo:
               adapter: mysql
               settings:
                 charset: utf8
                 queries:
                     utf8: "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci"
               classname: Propel\Runtime\Connection\ConnectionWrapper
-              dsn: "mysql:host=127.0.0.1;dbname=custom_framework"
+              dsn: "mysql:host=127.0.0.1;dbname=custom_framework_demo"
               user: root
               password:
               attributes:
   runtime:
-      defaultConnection: custom_framework
+      defaultConnection: custom_framework_demo
       connections:
-          - custom_framework
+          - custom_framework_demo
   generator:
-      defaultConnection: custom_framework
+      defaultConnection: custom_framework_demo
       connections:
-          - custom_framework
+          - custom_framework_demo
