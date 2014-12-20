@@ -1,4 +1,4 @@
 ## YAML Template.
 home:
     path: /{name}
-    defaults: { _controller: 'DefaultController::index' }
+    defaults: { _controller: 'DefaultController::index', name: null }

@@ -1,5 +1,5 @@
 firewalls:
-# Exemple from demo branch
+# Example from demo branch
 #    admin:
 #        pattern: /^\/admin.*/
 #        provider: model\Admin

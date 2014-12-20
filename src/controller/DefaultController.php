@@ -8,7 +8,12 @@ class DefaultController extends BaseController
 {
     public function indexAction(Request $request)
     {
-        return $this->render('index.php',
-                    array('name'=>$request->get('name')));
+        $flashBag = $this->getFlashBag();
+        $name = $request->attributes->get('name');
+        if(!$name)
+        {
+            $flashBag->add('warning', "Name not found");
+        }
+        return $this->render('home.php', array('name'=>$name));
     }
 }
