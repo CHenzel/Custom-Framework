@@ -104,7 +104,7 @@ CREATE TABLE `user_admin` (
   `statut` int(11) DEFAULT NULL,
   `date_creation` datetime DEFAULT NULL,
   `date_maj` datetime DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
+  `role` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -113,7 +113,7 @@ LOCK TABLES `user_admin` WRITE;
 
 INSERT INTO `user_admin` (`id`, `uid`, `username`, `password`, `salt`, `nom`, `prenom`, `ville`, `statut`, `date_creation`, `date_maj`, `role`)
 VALUES
-	(1,'','test@test.com','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+	(1,'','test@test.com','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3',NULL,NULL,NULL,1,NULL,NULL,1);
 
 /*!40000 ALTER TABLE `user_admin` ENABLE KEYS */;
 UNLOCK TABLES;

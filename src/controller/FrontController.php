@@ -8,7 +8,6 @@ class FrontController extends BaseController
 {
     public function indexAction(Request $request)
     {
-        return $this->render('front/index.php', 
-                    array('name'=>"coucou"));
+        return $this->render('front/index.php',array());
     }
 }

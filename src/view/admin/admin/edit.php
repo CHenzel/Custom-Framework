@@ -1,5 +1,5 @@
 <?php $view->extend('layout_admin.php');?>
-<h3><i class="fa fa-angle-right"></i> Auteur - Modifier l'auteur</h3>
+<h3><i class="fa fa-angle-right"></i> Admin - Modifier l'admin</h3>
 <div class="row">
     <div class="col-lg-12">
         <ol class="breadcrumb">
@@ -7,7 +7,7 @@
                 <i class="fa fa-dashboard"></i>  <a href="<?php echo $view['router']->generate('admin_home') ?>">Dashboard</a>
             </li>
             <li class="active">
-                <i class="fa fa-user"></i> Auteur
+                <i class="fa fa-user"></i> Admin
             </li>
             <li class="active">
                 <i class="fa fa-pencil"></i> Modification
@@ -23,9 +23,9 @@
 <div class="row">
     <div class="col-lg-8">
         <div class="form-panel">
-            <h4 class="mb"><i class="fa fa-angle-right"></i> Formulaire de modification de l'auteur <?php echo $author->getNom() ?></h4>
-            <form class="form-horizontal style-form" name="auteur" action="<?php echo $view['router']->generate('admin_author_edit',array('id'=>$author->getId())) ?>" method="POST">
-                <?php echo $view->render('admin/author/form.php', array('author'=>$author)); ?>
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Formulaire de modification de l'auteur <?php echo $admin->getNom() ?></h4>
+            <form class="form-horizontal style-form" name="admin" action="<?php echo $view['router']->generate('admin_admin_edit',array('id'=>$admin->getId())) ?>" method="POST">
+                <?php echo $view->render('admin/admin/form.php', array('admin'=>$admin)); ?>
                 <div class="form-group">
                     <div class="col-sm-10">
                         <input type="submit" class="btn btn-round btn-primary pull-right" value="Mettre à jour">

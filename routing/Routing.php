@@ -28,15 +28,6 @@ class Routing
     public function configure()
     {
         $this->parseYmlFile();
-        /*$this->addRoute('toto', new Route('/test/{id}', 
-                array('controller' => 'Test', 
-                      'action' => 'test')),
-                array(),
-                array(),
-                '',
-                array(),
-                array(array('POST'))
-                );*/
     }
     
     protected function parseYmlFile()
@@ -81,7 +72,7 @@ class Routing
         
         $parameters = $matcher->match($request->getPathInfo());
         
-        $this->security->configure($request/*,$requestContext,$this->routes*/);
+        $this->security->configure($request);
         
         $response = $this->security->accessCheck($request->getPathInfo());
         
@@ -90,8 +81,6 @@ class Routing
            $parameters = $matcher->match($response);
         }
             
-        
-        //var_dump(extract($matcher->match($request->getPathInfo()), EXTR_SKIP)); die('oki');
         $parametersController = explode("::",$parameters['_controller']);
         $controllerName = $parametersController[0];
         $actionName = $parametersController[1];
@@ -122,6 +111,5 @@ class Routing
         {
             $response->send();
         }
-        //return $response;
     }
 }

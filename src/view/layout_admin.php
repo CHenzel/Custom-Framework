@@ -213,8 +213,8 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="#"><img src="<?php echo $view['assets']->getUrl('dashgum/img/ui-sam.jpg') ?>" class="img-circle" width="60"></a></p>
-                  <h5 class="centered"><?php echo $user->getUserName() ?></h5>
-                  <p class="centered"><?php echo $user->getRoleLabel() ?></p>
+                  <h5 class="centered"><?php echo $user->getUserName(); ?></h5>
+                  <p class="centered"><?php echo $user->getRoleLabel(); ?></p>
               	  	
                   <li class="mt">
                       <a class="<?php if($request->getPathInfo() == $view['router']->generate('admin_home')) { echo'active'; } else { echo '';} ?>" href="<?php echo $view['router']->generate('admin_home') ?>">
@@ -222,6 +222,22 @@
                           <span>Dashboard</span>
                       </a>
                   </li>
+                  <?php if($user->getRole() == \model\Admin::USER_SUPER_ADMIN) { ?>
+                    <li class="sub-menu">
+                        <a class="<?php if(strpos($request->getPathInfo(), 'admin/admin')!== false) { echo'active'; } else { echo '';} ?>" href="javascript:;" >
+                            <i class="fa fa-users"></i>
+                            <span>Admins</span>
+                        </a>
+                        <ul class="sub">
+                          <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('admin_admin_list'))!== false) { echo'active'; } else { echo '';} ?>">
+                              <a href="<?php echo $view['router']->generate('admin_admin_list') ?>"><i class="fa fa-list"></i> Liste des admins</a>
+                          </li>
+                          <li class="<?php if(strpos($request->getPathInfo(), $view['router']->generate('admin_admin_new'))!== false) { echo'active'; } else { echo '';} ?>">
+                              <a href="<?php echo $view['router']->generate('admin_admin_new') ?>"><i class="fa fa-pencil-square-o"></i> Ajouter un admin</a>
+                          </li>
+                        </ul>
+                    </li>
+                  <?php } ?>
                   <li class="sub-menu">
                       <a class="<?php if(strpos($request->getPathInfo(), 'livre')!== false) { echo'active'; } else { echo '';} ?>" href="javascript:;" >
                           <i class="fa fa-book"></i>
