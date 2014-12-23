@@ -1,50 +1,40 @@
 Custom-Framework
 ================
 
-A home-made framework based on components symfony 2, created on the occasion of the [nuit de l'info 2014](http://www.nuitdelinfo.com/). 
-It has allowed the team Respectless to win undid it [Better development using the technologies of Web / mobile](http://www.nuitdelinfo.com/n2i/defis/41).
-This mini-framework is simple and allows to create quickly a web site. It includes the elements which one find classically in a system MVC (Router, Controller, View), It also includes notions of safety(security) of identification and a mode developer / production (Still in development).
+This home-made framework based on Simfony 2 components has been created on the occasion of the [nuit de l'info 2014](http://www.nuitdelinfo.com/). 
+It allowed the team Respectless to win the challenge [Better development using the technologies of Web / mobile](http://www.nuitdelinfo.com/n2i/defis/41).
+This mini-framework is very simple and allows you to create quickly a web site. It includes the elements which we find classically in a system MVC (Router, Model, Controller, View), It also includes notions of safety(security), of identification and a developer mode / and production (Still in development).
 As well as a datagrid using the sources of [spyrit/propel-datagrid-bundle](https://packagist.org/packages/spyrit/propel-datagrid-bundle).
 
 ## Installation
 
 ### Composer
 
-The project is stored on packagist [packagist](https://packagist.org/packages/chenzel/custom-framework)
+The project is stored on packagist [Chenzel/custom-framework](https://packagist.org/packages/chenzel/custom-framework)
 
-#### Solution 1
+#### Master
 ```
-composer create-project chenzel/custom-framework myproject
+composer create-project chenzel/custom-framework myproject dev-master
 ```
-
-#### Solution 2
-Add to your composer.json the following line :
-##### Master
-	"require": {
-    	...
-    	"chenzel/custom-framework": "dev-master"
-    	...
-	},
-##### v0.x
-    "require": {
-        ...
-        "chenzel/custom-framework": "0.x"
-        ...
-    },
-
-Then
+or
+#### Demo
 ```
-composer install
+composer create-project chenzel/custom-framework myproject dev-demo
+```
+or
+#### Tag
+```
+composer create-project chenzel/custom-framework myproject 0.*
 ```
 
-For both solutions, go to your folder "myproject" and make
+For those solutions, go to your folder "myproject" and make
 ```
 composer dump-autoload
 ```
 
 ### Propel
 
-Place you in the root of your project
+Take position you in the root of your project
 
 Create the symbolic link for propel.
 
@@ -87,17 +77,13 @@ composer dump-autoload
 
 ##### Composer
 ```
-    "require": {
-        ...
-        "chenzel/custom-framework": "dev-demo"
-        ...
-    },
+composer create-project chenzel/custom-framework myproject dev-demo
 ```
 
-Make the same process of installation and propel.
+Make the same process of installation of propel.
 Make the dump sql inconfig/dump/custom_framework_2014-12-14.sql
 
-#### Go with your web browser preferred to the following address :
+#### Go with your web browser prefered to the following address :
 
 ##### home 
 127.0.0.1 ou name-of-local-domain.*
@@ -118,15 +104,15 @@ TO DO
 
 TO DO
 
-#### view
+#### View
 
 TO DO
 
-#### Dossier web
+#### Web Folder
 
 TO DO
 
-#### Securité
+#### Security
 
 TO DO
 
@@ -134,7 +120,7 @@ TO DO
 
 TO DO
 
-I thank
+I would like to thank
 
 - Maxime Corson for his [spyrit/propel-datagrid-bundle](https://packagist.org/packages/spyrit/propel-datagrid-bundle).
-- Sensiolab et Symfony 2 for these [composants](http://symfony.com/).
+- Sensiolab et Symfony 2 for its [components](http://symfony.com/).

@@ -3,7 +3,7 @@ Custom-Framework
 
 Un framework fait maison basé sur des composants symfony 2, créé à l'occasion de la [nuit de l'info 2014](http://www.nuitdelinfo.com/). 
 Il a permit à l'équipe Respectless de gagner le défit [Meilleur développement utilisant les technologies du Web / mobile](http://www.nuitdelinfo.com/n2i/defis/41).
-Ce mini-framework est simple et permet de déployer rapidement un site web. Il inclut les éléments que l'on trouvent classiquement dans un système MVC (Routeur,Controleur,Vue), il inclut également des notions de sécurité d'identification et un mode développeur/production (Encore en développement). 
+Ce mini-framework est simple et permet de déployer rapidement un site web. Il inclut les éléments que l'on trouve classiquement dans un système MVC (Routeur, Model, Controleur,Vue), il inclut également des notions de sécurité d'identification et un mode développeur/production (Encore en développement). 
 Ainsi qu'un datagrid utilisant les sources du [spyrit/propel-datagrid-bundle](https://packagist.org/packages/spyrit/propel-datagrid-bundle).
 
 
@@ -13,32 +13,22 @@ Ainsi qu'un datagrid utilisant les sources du [spyrit/propel-datagrid-bundle](ht
 
 Le projet est hébergé sur [packagist](https://packagist.org/packages/chenzel/custom-framework)
 
-#### Solution 1
+#### Master
 ```
-composer create-project chenzel/custom-framework myproject
+composer create-project chenzel/custom-framework myproject dev-master
 ```
-
-#### Solution 2
-Ajoutez à votre composer.json la ligne suivante :
-##### Master
-	"require": {
-    	...
-    	"chenzel/custom-framework": "dev-master"
-    	...
-	},
-##### v0.x
-    "require": {
-        ...
-        "chenzel/custom-framework": "0.x"
-        ...
-    },
-
-Ensuite
+or
+#### Demo
 ```
-composer install
+composer create-project chenzel/custom-framework myproject dev-demo
+```
+or
+#### Tag
+```
+composer create-project chenzel/custom-framework myproject 0.*
 ```
 
-Pour les deux solutions, allez dans votre dossier "myproject" et faites
+Pour ces solutions, allez dans votre dossier "myproject" et faites
 ```
 composer dump-autoload
 ```
@@ -62,7 +52,7 @@ Créer le fichier de configuration de propel
 cp config/propel.dist.yml config/propel.yml
 ```
 
-Dans le fichier de configuration propel.yml remplacer la chaine "custom_framework" par le nom de votre base de données créée pour votre projet, ainsi que dans le fichier config/schema.xml
+Dans le fichier de configuration propel.yml remplacer la chaine "custom_framework" par le nom de votre base de données crée pour votre projet, ainsi que dans le fichier config/schema.xml
 
 Pour générer le fichier de configuration de propel 
 
@@ -87,11 +77,7 @@ composer dump-autoload
 
 ##### Composer
 ```
-    "require": {
-        ...
-        "chenzel/custom-framework": "dev-demo"
-        ...
-    },
+composer create-project chenzel/custom-framework myproject dev-demo
 ```
 
 Faites le même processus d'installation et propel.
@@ -114,7 +100,7 @@ mot de passe : test
 
 A faire
 
-#### Controlleur
+#### Contrôleur
 
 A faire
 
@@ -137,4 +123,4 @@ A faire
 Je remercie
 
 - Maxime Corson pour son [spyrit/propel-datagrid-bundle](https://packagist.org/packages/spyrit/propel-datagrid-bundle).
-- Sensiolab et Symfony 2 pour ces [composants](http://symfony.com/).
+- Sensiolab et Symfony 2 pour ses [composants](http://symfony.com/).
