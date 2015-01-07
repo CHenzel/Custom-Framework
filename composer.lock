@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d6414a829450ccf5d85a8256145e3ad2",
+    "hash": "542fd9fd845a5ab0fb9f744adc4459c8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -515,12 +515,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "1ff6caf45e7c5aac036b1536a914afbf4b8c6066"
+                "reference": "afaca2a33dc0d9442a7ca4d87def8aff7d937b87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/1ff6caf45e7c5aac036b1536a914afbf4b8c6066",
-                "reference": "1ff6caf45e7c5aac036b1536a914afbf4b8c6066",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/afaca2a33dc0d9442a7ca4d87def8aff7d937b87",
+                "reference": "afaca2a33dc0d9442a7ca4d87def8aff7d937b87",
                 "shasum": ""
             },
             "require": {
@@ -553,7 +553,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-12 16:23:01"
+            "time": "2015-01-04 09:06:13"
         },
         {
             "name": "symfony/finder",
@@ -962,6 +962,9 @@
         "symfony/filesystem": 20
     },
     "prefer-stable": false,
-    "platform": [],
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.4"
+    },
     "platform-dev": []
 }
